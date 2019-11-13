@@ -2,6 +2,7 @@ package patti.philippe.read_i.ui.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.disaster_recyclerview_item.view.*
 import patti.philippe.read_i.R
@@ -24,14 +26,12 @@ class DisasterListAdapter internal constructor(
     private var disasters = emptyList<Disaster>()
 
     inner class DisasterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //TODO check if good R reference
-        val alert: LinearLayout = itemView.findViewById(R.id.alert)
+        val alert: CardView = itemView.findViewById(R.id.alert)
+        val buttonsLayout: LinearLayout = itemView.findViewById(R.id.alertButtons)
         val icon: ImageView = itemView.findViewById(R.id.alerticon)
         val location: TextView = itemView.findViewById(R.id.alertLocation)
-        val distance: TextView = itemView.findViewById(R.id.alertDistance)
         val timestamp: TextView = itemView.findViewById(R.id.alertTimestamp)
-        val advice: TextView = itemView.findViewById(R.id.alertAdvice)
-        val moreInfo: Button = itemView.findViewById(R.id.alertMoreInfo)
+        val gravityIcon : ImageView = itemView.findViewById(R.id.alertGravity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterViewHolder {
@@ -41,18 +41,11 @@ class DisasterListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
         val current = disasters[position]
-        holder.alert.setBackgroundResource(getBackgroundDrawableId(current.gravity))
+        holder.alert.setOnClickListener{holder.buttonsLayout.isEnabled = !holder.buttonsLayout.isEnabled}
         holder.icon.setImageResource(getAlertIconId(current.type))
-        holder.location.text = current.location
+        holder.location.text = "${current.location} ( x km)"
         holder.timestamp.text = current.date.toString()
-        holder.distance.text = "30 km"
-        holder.advice.text = "ADVICE"
-    }
-
-    private fun getBackgroundDrawableId(gravity: DisasterGravity): Int = when (gravity){
-        DisasterGravity.INFO -> R.drawable.alert_info
-        DisasterGravity.WARNING -> R.drawable.alert_warning
-        DisasterGravity.CRITICAL -> R.drawable.alert_critical
+        holder.gravityIcon.setImageResource(getAlertGravityIconId(current.gravity))
     }
 
     private fun getAlertIconId(type: DisasterType) = when (type) {
@@ -64,6 +57,12 @@ class DisasterListAdapter internal constructor(
         DisasterType.HURRICANE -> R.drawable.hurricane_icon
         DisasterType.TSUNAMI -> R.drawable.tsunami_icon
         DisasterType.VOLCANIC_ERUPTION -> R.drawable.volcanic_eruption_icon
+    }
+
+    private fun getAlertGravityIconId(gravity: DisasterGravity) = when(gravity){
+        DisasterGravity.WARNING -> R.drawable.ic_info_24dp
+        DisasterGravity.CRITICAL -> R.drawable.ic_warning_24dp
+        else -> 0
     }
 
 
