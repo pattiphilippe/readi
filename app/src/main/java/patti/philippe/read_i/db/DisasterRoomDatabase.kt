@@ -33,15 +33,14 @@ abstract class DisasterRoomDatabase : RoomDatabase() {
         suspend fun populateDatabase(disasterDao: DisasterDao) {
             disasterDao.deleteAll()
             val locations = arrayOf("Enghien", "Bruxelles", "Liège", "Bruges")
-            println("in populate database")
             DisasterType.values().forEach { type ->
                 locations.forEach { location ->
-                    disasterDao.insert(
-                        Disaster(type = type, location = location, date = Date()))
-                    println("in populate => disaster $type, $location, date")
+                    DisasterGravity.values().forEach {
+                        disasterDao.insert(
+                            Disaster(0, type, location, Date(), it))
+                    }
                 }
             }
-            println("after populate database")
         }
     }
 

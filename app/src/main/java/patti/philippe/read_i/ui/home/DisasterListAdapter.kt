@@ -1,16 +1,19 @@
 package patti.philippe.read_i.ui.home
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.disaster_recyclerview_item.view.*
 import patti.philippe.read_i.R
 import patti.philippe.read_i.db.Disaster
+import patti.philippe.read_i.db.DisasterGravity
 import patti.philippe.read_i.db.DisasterType
 
 class DisasterListAdapter internal constructor(
@@ -22,6 +25,7 @@ class DisasterListAdapter internal constructor(
 
     inner class DisasterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //TODO check if good R reference
+        val alert: LinearLayout = itemView.findViewById(R.id.alert)
         val icon: ImageView = itemView.findViewById(R.id.alerticon)
         val location: TextView = itemView.findViewById(R.id.alertLocation)
         val distance: TextView = itemView.findViewById(R.id.alertDistance)
@@ -37,13 +41,18 @@ class DisasterListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
         val current = disasters[position]
-        println("in onBindViewHolder update disaster ${current.type}, ${current.location}")
+        holder.alert.setBackgroundResource(getBackgroundDrawableId(current.gravity))
         holder.icon.setImageResource(getAlertIconId(current.type))
         holder.location.text = current.location
         holder.timestamp.text = current.date.toString()
         holder.distance.text = "30 km"
         holder.advice.text = "ADVICE"
-        println("end onBindViewHolder")
+    }
+
+    private fun getBackgroundDrawableId(gravity: DisasterGravity): Int = when (gravity){
+        DisasterGravity.INFO -> R.drawable.alert_info
+        DisasterGravity.WARNING -> R.drawable.alert_warning
+        DisasterGravity.CRITICAL -> R.drawable.alert_critical
     }
 
     private fun getAlertIconId(type: DisasterType) = when (type) {
