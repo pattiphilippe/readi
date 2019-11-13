@@ -26,11 +26,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = DisasterListAdapter(requireContext())
+        recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        recyclerview.adapter = adapter
         homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
-        recyclerview.apply {
-            layoutManager = LinearLayoutManager(this@HomeFragment.requireContext())
-            adapter = DisasterListAdapter(this@HomeFragment.requireContext())
-        }
-
+        homeViewModel.allDisasters.observe(this, Observer { disasters ->
+            disasters?.let { adapter.setDisasters(it) }
+        })
     }
 }

@@ -23,7 +23,7 @@ class DisasterListAdapter internal constructor(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterViewHolder {
-        val itemView = inflater.inflate(R.layout.disaster_recyclerview_item, parent)
+        val itemView = inflater.inflate(R.layout.disaster_recyclerview_item, parent, false)
         return DisasterViewHolder(itemView)
     }
 
