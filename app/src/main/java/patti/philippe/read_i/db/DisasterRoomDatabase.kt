@@ -1,5 +1,6 @@
 package patti.philippe.read_i.db
 
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
@@ -8,6 +9,7 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 @Database(entities = arrayOf(Disaster::class), version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -30,10 +32,16 @@ abstract class DisasterRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(disasterDao: DisasterDao) {
             disasterDao.deleteAll()
+            val locations = arrayOf("Enghien", "Bruxelles", "Liège", "Bruges")
+            println("in populate database")
             DisasterType.values().forEach { type ->
-                disasterDao.insert(Disaster(type))
+                locations.forEach { location ->
+                    disasterDao.insert(
+                        Disaster(type = type, location = location, date = Date()))
+                    println("in populate => disaster $type, $location, date")
+                }
             }
-
+            println("after populate database")
         }
     }
 
@@ -58,3 +66,5 @@ abstract class DisasterRoomDatabase : RoomDatabase() {
         }
     }
 }
+
+
