@@ -19,6 +19,7 @@ import patti.philippe.read_i.db.Alert
 import patti.philippe.read_i.db.Disaster
 import patti.philippe.read_i.db.DisasterGravity
 import patti.philippe.read_i.db.DisasterType
+import kotlin.math.roundToInt
 
 class DisasterListAdapter internal constructor(
     context: Context
@@ -34,7 +35,7 @@ class DisasterListAdapter internal constructor(
         val icon: ImageView = itemView.findViewById(R.id.alerticon)
         val location: TextView = itemView.findViewById(R.id.alertLocation)
         val timestamp: TextView = itemView.findViewById(R.id.alertTimestamp)
-        val gravityIcon : ImageView = itemView.findViewById(R.id.alertGravity)
+        val gravityIcon: ImageView = itemView.findViewById(R.id.alertGravity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterViewHolder {
@@ -44,9 +45,14 @@ class DisasterListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
         val current = alerts[position]
-        holder.alert.setOnClickListener{holder.buttonsLayout.isEnabled = !holder.buttonsLayout.isEnabled}
+        holder.alert.setOnClickListener {
+            holder.buttonsLayout.isEnabled = !holder.buttonsLayout.isEnabled
+        }
         holder.icon.setImageResource(getAlertIconId(current.disaster.type))
-        holder.location.text = current.disaster.location.toString()
+        val location = """Coordinates
+            |(${current.disaster.latitude} ; ${current.disaster.longitude} ) 
+            | (${current.distanceToMe?.div(1000)?.roundToInt()} km)""".trimMargin()
+        holder.location.text = location
         holder.timestamp.text = current.disaster.date.toString()
         holder.gravityIcon.setImageResource(getAlertGravityIconId(current.disaster.gravity))
     }
@@ -62,7 +68,7 @@ class DisasterListAdapter internal constructor(
         DisasterType.VOLCANIC_ERUPTION -> R.drawable.volcanic_eruption_icon
     }
 
-    private fun getAlertGravityIconId(gravity: DisasterGravity) = when(gravity){
+    private fun getAlertGravityIconId(gravity: DisasterGravity) = when (gravity) {
         DisasterGravity.WARNING -> R.drawable.ic_info_24dp
         DisasterGravity.CRITICAL -> R.drawable.ic_warning_24dp
         else -> 0
@@ -70,11 +76,12 @@ class DisasterListAdapter internal constructor(
 
 
     internal fun setDisasters(disasters: List<Disaster>) {
+        alerts.clear()
         disasters.forEach { alerts.add(Alert(it)) }
         notifyDataSetChanged()
     }
 
-    internal fun setLocation(location: Location){
+    internal fun setLocation(location: Location) {
         alerts.forEach { it.myLocation = location }
         notifyDataSetChanged()
     }

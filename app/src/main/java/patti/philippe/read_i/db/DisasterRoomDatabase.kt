@@ -33,15 +33,15 @@ abstract class DisasterRoomDatabase : RoomDatabase() {
         suspend fun populateDatabase(disasterDao: DisasterDao) {
             disasterDao.deleteAll()
             val locations = arrayOf(
-                Coordinate(50.6722429, 3.9672856),
-                Coordinate(50.8550625, 4.3053506),
-                Coordinate(50.624728, 5.5290507),
-                Coordinate(51.2608054, 3.0820634))
+                Coordinate(latitude = 50.6722429, longitude = 3.9672856),
+                Coordinate(latitude = 50.8550625, longitude = 4.3053506),
+                Coordinate(latitude = 50.624728, longitude = 5.5290507),
+                Coordinate(latitude = 51.2608054, longitude = 3.0820634))
             DisasterType.values().forEach { type ->
                 locations.forEach { location ->
                     DisasterGravity.values().forEach {
                         disasterDao.insert(
-                            Disaster(0, type, location, Date(), it))
+                            Disaster(0, type, location.latitude, location.longitude, Date(), it))
                     }
                 }
             }
