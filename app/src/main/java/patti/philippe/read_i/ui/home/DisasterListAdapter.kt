@@ -69,9 +69,12 @@ class DisasterListAdapter internal constructor(
     }
 
 
-    internal fun setAlerts(disasters: List<Disaster>, location : Location) {
-        disasters.forEach { disaster -> alerts.add(Alert(disaster, location))
-            .also { println("$disaster") } }
+    internal fun setAlerts(disasters: List<Disaster>) {
+        val location = Location("").apply {
+            latitude = 50.0
+            longitude = 4.0
+        }
+        disasters.forEach { alerts.add(Alert(it, location)) }
         notifyDataSetChanged()
     }
 
