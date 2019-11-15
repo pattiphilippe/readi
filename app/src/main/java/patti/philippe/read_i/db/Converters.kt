@@ -30,4 +30,6 @@ class Converters {
         2 -> DisasterGravity.WARNING
         else -> DisasterGravity.CRITICAL
     }
+
+
 }

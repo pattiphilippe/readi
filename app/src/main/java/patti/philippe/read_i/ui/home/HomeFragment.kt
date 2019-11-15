@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.disaster_recyclerview_item.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import patti.philippe.read_i.R
@@ -17,6 +19,7 @@ import patti.philippe.read_i.R
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: DisasterViewModel
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,8 +33,17 @@ class HomeFragment : Fragment() {
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         recyclerview.adapter = adapter
         homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
-            disasters?.let { adapter.setDisasters(it) }
+            println("disasters changed : in changelistener of HomeFragment")
+            disasters?.forEach { println("$it") }
+            disasters?.let {
+                fusedLocationClient.lastLocation.addOnSuccessListener {
+                    println("lastlocation success")
+                    println("location : $it")
+                    adapter.setAlerts(disasters, it)
+                }
+            }
         })
     }
 }

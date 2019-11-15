@@ -2,6 +2,7 @@ package patti.philippe.read_i.ui.home
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.location.Location
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.disaster_recyclerview_item.view.*
 import patti.philippe.read_i.R
+import patti.philippe.read_i.db.Alert
 import patti.philippe.read_i.db.Disaster
 import patti.philippe.read_i.db.DisasterGravity
 import patti.philippe.read_i.db.DisasterType
@@ -23,7 +25,8 @@ class DisasterListAdapter internal constructor(
 ) : RecyclerView.Adapter<DisasterListAdapter.DisasterViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var disasters = emptyList<Disaster>()
+    private var alerts = mutableListOf<Alert>()
+
 
     inner class DisasterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val alert: CardView = itemView.findViewById(R.id.alert)
@@ -40,12 +43,12 @@ class DisasterListAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
-        val current = disasters[position]
+        val current = alerts[position]
         holder.alert.setOnClickListener{holder.buttonsLayout.isEnabled = !holder.buttonsLayout.isEnabled}
-        holder.icon.setImageResource(getAlertIconId(current.type))
-        holder.location.text = "${current.location} ( x km)"
-        holder.timestamp.text = current.date.toString()
-        holder.gravityIcon.setImageResource(getAlertGravityIconId(current.gravity))
+        holder.icon.setImageResource(getAlertIconId(current.disaster.type))
+        holder.location.text = current.disaster.location.toString()
+        holder.timestamp.text = current.disaster.date.toString()
+        holder.gravityIcon.setImageResource(getAlertGravityIconId(current.disaster.gravity))
     }
 
     private fun getAlertIconId(type: DisasterType) = when (type) {
@@ -66,10 +69,11 @@ class DisasterListAdapter internal constructor(
     }
 
 
-    internal fun setDisasters(disasters: List<Disaster>) {
-        this.disasters = disasters
+    internal fun setAlerts(disasters: List<Disaster>, location : Location) {
+        disasters.forEach { disaster -> alerts.add(Alert(disaster, location))
+            .also { println("$disaster") } }
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = disasters.size
+    override fun getItemCount() = alerts.size
 }
