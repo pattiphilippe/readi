@@ -69,7 +69,7 @@ class DisasterListAdapter internal constructor(
     }
 
 
-    internal fun setAlerts(disasters: List<Disaster>) {
+    internal fun setDisasters(disasters: List<Disaster>) {
         val location = Location("").apply {
             latitude = 50.0
             longitude = 4.0

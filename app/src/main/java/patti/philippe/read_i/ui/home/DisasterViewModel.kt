@@ -13,7 +13,6 @@ class DisasterViewModel(application: Application) : AndroidViewModel(application
     private val repository: DisasterRepository
     val allDisasters: LiveData<List<Disaster>>
 
-
     init {
         val disastersDao =
             DisasterRoomDatabase.getDatabase(application, viewModelScope).disasterDao()
@@ -24,4 +23,6 @@ class DisasterViewModel(application: Application) : AndroidViewModel(application
     fun insert(disaster: Disaster) = viewModelScope.launch {
         repository.insert(disaster)
     }
+
+
 }
