@@ -70,11 +70,12 @@ class DisasterListAdapter internal constructor(
 
 
     internal fun setDisasters(disasters: List<Disaster>) {
-        val location = Location("").apply {
-            latitude = 50.0
-            longitude = 4.0
-        }
-        disasters.forEach { alerts.add(Alert(it, location)) }
+        disasters.forEach { alerts.add(Alert(it)) }
+        notifyDataSetChanged()
+    }
+
+    internal fun setLocation(location: Location){
+        alerts.forEach { it.myLocation = location }
         notifyDataSetChanged()
     }
 

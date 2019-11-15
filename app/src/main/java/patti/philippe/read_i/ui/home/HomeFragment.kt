@@ -23,12 +23,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import patti.philippe.read_i.R
+import kotlin.properties.Delegates
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: DisasterViewModel
+    private var mAdapter:DisasterListAdapter? = null
     private val REQUEST_PERMISSION_LOCATION = 10
-    private lateinit var mLastLocation: Location
+    private var mLastLocation: Location by Delegates.observable(Location("")) {
+        property, oldValue, newValue -> mAdapter?.setLocation(newValue)
+    }
     private lateinit var mLocationRequest: LocationRequest
     private val INTERVAL: Long = 20000
     private val FASTEST_INTERVAL: Long = 10000
@@ -43,13 +47,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = DisasterListAdapter(requireContext())
+        mAdapter = DisasterListAdapter(requireContext())
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        recyclerview.adapter = adapter
+        recyclerview.adapter = mAdapter
         homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
             disasters?.let {
-                adapter.setDisasters(it)
+                mAdapter?.setDisasters(it)
             }
         })
         mLocationRequest = LocationRequest()
@@ -59,6 +63,9 @@ class HomeFragment : Fragment() {
             buildAlertMessageNoGps()
         }
     }
+
+    ///////////////////////////////LOCATION SHIT///////////////////////////////////
+
 
     override fun onResume() {
         super.onResume()
@@ -88,7 +95,6 @@ class HomeFragment : Fragment() {
         } else {
             true
         }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -121,7 +127,7 @@ class HomeFragment : Fragment() {
 
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            onLocationChanged(locationResult.lastLocation)
+            mLastLocation = locationResult.lastLocation
         }
     }
 
@@ -150,7 +156,7 @@ class HomeFragment : Fragment() {
         ) {
             return
         }
-        mFusedLocationProviderClient!!.requestLocationUpdates(
+        mFusedLocationProviderClient?.requestLocationUpdates(
             mLocationRequest,
             mLocationCallback,
             Looper.myLooper()
@@ -158,7 +164,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun stopLocationUpdates() {
-        mFusedLocationProviderClient!!.removeLocationUpdates(mLocationCallback)
+        mFusedLocationProviderClient?.removeLocationUpdates(mLocationCallback)
     }
 
 }
