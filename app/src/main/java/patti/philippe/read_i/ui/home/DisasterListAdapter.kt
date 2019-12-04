@@ -1,6 +1,7 @@
 package patti.philippe.read_i.ui.home
 
 import android.content.Context
+import android.database.DataSetObserver
 import android.graphics.drawable.Drawable
 import android.location.Location
 import android.media.Image
@@ -14,19 +15,23 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.disaster_recyclerview_item.view.*
+import kotlinx.coroutines.CoroutineScope
 import patti.philippe.read_i.R
 import patti.philippe.read_i.db.Alert
 import patti.philippe.read_i.db.Disaster
 import patti.philippe.read_i.db.DisasterGravity
 import patti.philippe.read_i.db.DisasterType
+import java.util.*
 import kotlin.math.roundToInt
 
 class DisasterListAdapter internal constructor(
     context: Context
 ) : RecyclerView.Adapter<DisasterListAdapter.DisasterViewHolder>() {
 
+    private var alerts = emptyList<Alert>()
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var alerts = mutableListOf<Alert>()
+    val UPDATE_LOCATION = "UPDATE_LOCATION"
+    val UPDATE_DISASTER = "UPDATE_DISASTER"
 
 
     inner class DisasterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -44,17 +49,42 @@ class DisasterListAdapter internal constructor(
     }
 
     override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
+        println("in bind")
         val current = alerts[position]
-        holder.alert.setOnClickListener {
-            holder.buttonsLayout.isEnabled = !holder.buttonsLayout.isEnabled
+        updateDisasterFields(holder, current)
+        updateLocationField(holder, current)
+    }
+
+    override fun onBindViewHolder(
+        holder: DisasterViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        println("in bind with payloads")
+        if (payloads.isNotEmpty()) {
+            println("payloads is not empty")
+            when (payloads[0]) {
+                UPDATE_DISASTER -> updateDisasterFields(holder, alerts[position])
+                UPDATE_LOCATION -> updateLocationField(holder, alerts[position])
+            }
+        } else {
+            println("payloads is empty")
+            onBindViewHolder(holder, position)
         }
+    }
+
+    private fun updateDisasterFields(holder: DisasterViewHolder, current: Alert) {
         holder.icon.setImageResource(getAlertIconId(current.disaster.type))
-        val location = """Coordinates
-            |(${current.disaster.latitude} ; ${current.disaster.longitude} ) 
-            | (${current.distanceToMe?.div(1000)?.roundToInt()} km)""".trimMargin()
-        holder.location.text = location
         holder.timestamp.text = current.disaster.date.toString()
         holder.gravityIcon.setImageResource(getAlertGravityIconId(current.disaster.gravity))
+    }
+
+    private fun updateLocationField(holder: DisasterViewHolder, current: Alert) {
+        println("in updateLocationField")
+        val location = """Coordinates
+            |(${current.disaster.latitude} ; ${current.disaster.longitude} ) 
+            |(${current.distanceToMe?.div(1000)?.roundToInt()} km)""".trimMargin()
+        holder.location.text = location
     }
 
     private fun getAlertIconId(type: DisasterType) = when (type) {
@@ -75,15 +105,16 @@ class DisasterListAdapter internal constructor(
     }
 
 
-    internal fun setDisasters(disasters: List<Disaster>) {
-        alerts.clear()
-        disasters.forEach { alerts.add(Alert(it)) }
-        notifyDataSetChanged()
+    internal fun setDisasters(disasters: List<Disaster>, context: Context) {
+        CoroutineScope(context)
+        alerts = List(disasters.size) { index -> Alert(disasters[index]) }
+        notifyItemRangeChanged(0, itemCount, listOf(UPDATE_DISASTER))
     }
 
     internal fun setLocation(location: Location) {
         alerts.forEach { it.myLocation = location }
-        notifyDataSetChanged()
+        println("notifyItemRangeChanged from 0 to $itemCount")
+        notifyItemRangeChanged(0, itemCount, listOf(UPDATE_LOCATION))
     }
 
     override fun getItemCount() = alerts.size

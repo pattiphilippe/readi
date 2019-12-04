@@ -12,16 +12,13 @@ data class Alert(val disaster: Disaster){
     var distanceToMe : Float? = null
     private set
 
-    private fun computeDistanceToMe(){
-        myLocation?.let {
-            val disasterLocation = Location("").apply {
-                latitude = disaster.latitude
-                longitude = disaster.longitude
-            }
-            distanceToMe = myLocation!!.distanceTo(disasterLocation)
-            println("myLocation : $myLocation")
-            println("disasterLocation : $disasterLocation")
-            println("distanceToMe : $distanceToMe")
+            private fun computeDistanceToMe(){
+                myLocation?.let {
+                    val disasterLocation = Location("").apply {
+                        latitude = disaster.latitude
+                        longitude = disaster.longitude
+                    }
+                    distanceToMe = myLocation!!.distanceTo(disasterLocation)
         }
     }
 

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import patti.philippe.read_i.R
@@ -30,11 +31,13 @@ class HomeFragment : Fragment() {
     private var mAdapter:DisasterListAdapter? = null
     private lateinit var homeViewModel: DisasterViewModel
     private lateinit var mLocationController: LocationController
-    private val REQUEST_PERMISSION_LOCATION = 10
+    companion object{
+        val REQUEST_PERMISSION_LOCATION = 10
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mLocationController = LocationController(requireContext(), requireActivity())
+        mLocationController = LocationController(requireActivity())
     }
 
     override fun onCreateView(
@@ -50,17 +53,20 @@ class HomeFragment : Fragment() {
         recyclerview.adapter = mAdapter
         homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
-            disasters?.let {
-                mAdapter?.setDisasters(it)
-            }
+            println("DISASTERS CHANGING")
+            mAdapter?.setDisasters(disasters)
+        })
+        mLocationController.mLastLocation.observe(this, Observer { location ->
+            println("LOCATION CHANGING")
+            mAdapter?.setLocation(location)
         })
     }
 
 
     override fun onResume() {
         super.onResume()
-        if (mLocationController.checkPermissionForLocation(requireContext(), requireActivity())){
-            mLocationController.startLocationUpdates(requireContext(), requireActivity())
+        if (mLocationController.checkPermissionForLocation(requireActivity())){
+            mLocationController.startLocationUpdates(requireActivity())
         }
     }
 
@@ -76,7 +82,7 @@ class HomeFragment : Fragment() {
     ) {
         if (requestCode == REQUEST_PERMISSION_LOCATION) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mLocationController.startLocationUpdates(requireContext(), requireActivity())
+                mLocationController.startLocationUpdates(requireActivity())
             } else {
                 Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
             }

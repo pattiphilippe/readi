@@ -9,45 +9,44 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
+import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.*
-import kotlin.properties.Delegates
 
-class LocationController(context: Context, activity: Activity) {
+class LocationController(activity: Activity) {
 
 
     private val INTERVAL: Long = 20000
     private val FASTEST_INTERVAL: Long = 10000
     private val mLocationRequest = LocationRequest()
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
-    private var mLastLocation: Location by Delegates.observable(Location("")) { property, oldValue, newValue ->
-        mAdapter?.setLocation(newValue)
-    }
+    val mLastLocation: MutableLiveData<Location> = MutableLiveData()
 
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            mLastLocation = locationResult.lastLocation
+            mLastLocation.value = locationResult.lastLocation
         }
     }
 
-    //TODO companion object and "static" methods" for all the methods in this class?
+    //TODO ? companion object and "static" methods" for all the methods in this class?
 
     init {
         mLocationRequest
         val locationManager =
             activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            buildAlertMessageNoGps(activity, context)
+            buildAlertMessageNoGps(activity)
         }
     }
 
-    fun checkPermissionForLocation(context: Context, activity: Activity) =
+    fun checkPermissionForLocation(activity: Activity) =
         //TODO check following line
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            if (activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED
             ) {
                 true
@@ -55,7 +54,7 @@ class LocationController(context: Context, activity: Activity) {
                 ActivityCompat.requestPermissions(
                     activity,
                     arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                    REQUEST_PERMISSION_LOCATION
+                    HomeFragment.REQUEST_PERMISSION_LOCATION
                 )
                 false
             }
@@ -64,12 +63,13 @@ class LocationController(context: Context, activity: Activity) {
         }
 
 
-    private fun buildAlertMessageNoGps(context: Context, activity: Activity) {
-        val builder = AlertDialog.Builder(context)
+    private fun buildAlertMessageNoGps(activity: Activity) {
+        val builder = AlertDialog.Builder(activity)
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
             .setCancelable(false)
             .setPositiveButton("Yes") { dialog, id ->
-                startActivityForResult(activity, Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS), 11)
+                startActivityForResult(activity, Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
+                    11, Bundle.EMPTY)
             }
             .setNegativeButton("No") { dialog, id ->
                 dialog.cancel()
@@ -79,7 +79,7 @@ class LocationController(context: Context, activity: Activity) {
         alert.show()
     }
 
-    fun startLocationUpdates(context: Context, activity: Activity) {
+    fun startLocationUpdates(activity: Activity) {
         mLocationRequest.apply {
             priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
             interval = INTERVAL
@@ -97,7 +97,7 @@ class LocationController(context: Context, activity: Activity) {
             LocationServices.getFusedLocationProviderClient(activity)
 
         if (ActivityCompat.checkSelfPermission(
-                context,
+                activity,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
             != PackageManager.PERMISSION_GRANTED
@@ -112,7 +112,9 @@ class LocationController(context: Context, activity: Activity) {
     }
 
     fun stopLocationUpdates() {
-        mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback)
+        if(::mFusedLocationProviderClient.isInitialized) {
+            mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback)
+        }
     }
 
 }
