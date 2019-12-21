@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
             println("DISASTERS CHANGING")
-            mAdapter?.setDisasters(disasters)
+            mAdapter?.setDisasters(disasters, requireContext())
         })
         mLocationController.mLastLocation.observe(this, Observer { location ->
             println("LOCATION CHANGING")

@@ -106,7 +106,6 @@ class DisasterListAdapter internal constructor(
 
 
     internal fun setDisasters(disasters: List<Disaster>, context: Context) {
-        CoroutineScope(context)
         alerts = List(disasters.size) { index -> Alert(disasters[index]) }
         notifyItemRangeChanged(0, itemCount, listOf(UPDATE_DISASTER))
     }
