@@ -1,40 +1,29 @@
 package patti.philippe.read_i.ui.home
 
 import android.content.Context
-import android.database.DataSetObserver
-import android.graphics.drawable.Drawable
-import android.location.Location
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.disaster_recyclerview_item.view.*
-import kotlinx.coroutines.CoroutineScope
 import patti.philippe.read_i.R
 import patti.philippe.read_i.db.Alert
 import patti.philippe.read_i.db.Disaster
 import patti.philippe.read_i.db.DisasterGravity
 import patti.philippe.read_i.db.DisasterType
-import java.util.*
 import kotlin.math.roundToInt
 
-class DisasterListAdapter internal constructor(
-    context: Context
-) : RecyclerView.Adapter<DisasterListAdapter.DisasterViewHolder>() {
+class AlertsAdapter internal constructor(context: Context) :
+    RecyclerView.Adapter<AlertsAdapter.AlertViewHolder>() {
 
-    private var alerts = emptyList<Alert>()
+
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    val UPDATE_LOCATION = "UPDATE_LOCATION"
-    val UPDATE_DISASTER = "UPDATE_DISASTER"
+    private var alerts = emptyList<Alert>()
 
-
-    inner class DisasterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val alert: CardView = itemView.findViewById(R.id.alert)
         val buttonsLayout: LinearLayout = itemView.findViewById(R.id.alertButtons)
         val icon: ImageView = itemView.findViewById(R.id.alerticon)
@@ -43,43 +32,25 @@ class DisasterListAdapter internal constructor(
         val gravityIcon: ImageView = itemView.findViewById(R.id.alertGravity)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisasterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlertViewHolder {
         val itemView = inflater.inflate(R.layout.disaster_recyclerview_item, parent, false)
-        return DisasterViewHolder(itemView)
+        return AlertViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: DisasterViewHolder, position: Int) {
-        println("in bind")
+    override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
         val current = alerts[position]
         updateDisasterFields(holder, current)
         updateLocationField(holder, current)
+
     }
 
-    override fun onBindViewHolder(
-        holder: DisasterViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        println("in bind with payloads")
-        if (payloads.isNotEmpty()) {
-            println("payloads is not empty")
-            when (payloads[0]) {
-                UPDATE_DISASTER -> updateDisasterFields(holder, alerts[position])
-                UPDATE_LOCATION -> updateLocationField(holder, alerts[position])
-            }
-        } else {
-            println("payloads is empty")
-            onBindViewHolder(holder, position)
-        }
-    }
-
-    private fun updateDisasterFields(holder: DisasterViewHolder, current: Alert) {
+    private fun updateDisasterFields(holder: AlertViewHolder, current: Alert) {
         holder.icon.setImageResource(getAlertIconId(current.disaster.type))
         holder.timestamp.text = current.disaster.date.toString()
         holder.gravityIcon.setImageResource(getAlertGravityIconId(current.disaster.gravity))
     }
 
-    private fun updateLocationField(holder: DisasterViewHolder, current: Alert) {
+    private fun updateLocationField(holder: AlertViewHolder, current: Alert) {
         println("in updateLocationField")
         val location = """Coordinates
             |(${current.disaster.latitude} ; ${current.disaster.longitude} ) 
@@ -104,18 +75,12 @@ class DisasterListAdapter internal constructor(
         else -> 0
     }
 
-
-    internal fun setDisasters(disasters: List<Disaster>, context: Context) {
-        CoroutineScope(context)
-        alerts = List(disasters.size) { index -> Alert(disasters[index]) }
-        notifyItemRangeChanged(0, itemCount, listOf(UPDATE_DISASTER))
-    }
-
-    internal fun setLocation(location: Location) {
-        alerts.forEach { it.myLocation = location }
-        println("notifyItemRangeChanged from 0 to $itemCount")
-        notifyItemRangeChanged(0, itemCount, listOf(UPDATE_LOCATION))
+    internal fun setDisasters(disasters : List<Disaster>){
+        println("in set Disasters")
+        this.alerts = List(disasters.size) { index -> Alert(disasters[index]) }
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = alerts.size
+
 }

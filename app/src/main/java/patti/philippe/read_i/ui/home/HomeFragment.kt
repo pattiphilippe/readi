@@ -28,10 +28,10 @@ import kotlin.properties.Delegates
 
 class HomeFragment : Fragment() {
 
-    private var mAdapter:DisasterListAdapter? = null
     private lateinit var homeViewModel: DisasterViewModel
     private lateinit var mLocationController: LocationController
-    companion object{
+
+    companion object {
         val REQUEST_PERMISSION_LOCATION = 10
     }
 
@@ -44,28 +44,30 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_home, container, false)
+    ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAdapter = DisasterListAdapter(requireContext())
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = AlertsAdapter(requireContext())
+        recyclerView.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        recyclerview.adapter = mAdapter
-        homeViewModel = ViewModelProviders.of(requireActivity()).get(DisasterViewModel::class.java)
+        homeViewModel = ViewModelProviders.of(this).get(DisasterViewModel::class.java)
+
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
-            println("DISASTERS CHANGING")
-            mAdapter?.setDisasters(disasters)
+            disasters?.let{adapter.setDisasters(it)}
         })
-        mLocationController.mLastLocation.observe(this, Observer { location ->
-            println("LOCATION CHANGING")
-            mAdapter?.setLocation(location)
-        })
+
     }
 
 
     override fun onResume() {
         super.onResume()
-        if (mLocationController.checkPermissionForLocation(requireActivity())){
+        if (mLocationController.checkPermissionForLocation(requireActivity())) {
             mLocationController.startLocationUpdates(requireActivity())
         }
     }
