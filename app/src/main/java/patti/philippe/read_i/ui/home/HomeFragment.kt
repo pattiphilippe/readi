@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mLocationController = LocationController(requireActivity())
+        homeViewModel = ViewModelProviders.of(this).get(DisasterViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -56,7 +57,6 @@ class HomeFragment : Fragment() {
         val adapter = AlertsAdapter(requireContext())
         recyclerView.adapter = adapter
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
-        homeViewModel = ViewModelProviders.of(this).get(DisasterViewModel::class.java)
 
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
             disasters?.let{adapter.setDisasters(it)}
