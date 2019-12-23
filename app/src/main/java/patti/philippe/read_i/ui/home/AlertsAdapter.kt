@@ -23,6 +23,7 @@ class AlertsAdapter internal constructor(context: Context) :
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var mAlerts = emptyList<Alert>()
+    //TODO try with lateinit, to avoid nullable values in Alert
     private var mLocation : Location? = null
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -77,6 +78,7 @@ class AlertsAdapter internal constructor(context: Context) :
         else -> 0
     }
 
+    //TODO put setters in a coroutine scope, each waiting the end of the other call, before executing
     internal fun setDisasters(disasters : List<Disaster>){
         println("in set Disasters")
         this.mAlerts = List(disasters.size) { index -> Alert(disasters[index], mLocation) }
@@ -85,6 +87,7 @@ class AlertsAdapter internal constructor(context: Context) :
 
     internal fun setLocation(location : Location){
         println("in set Location")
+        this.mLocation = location
         this.mAlerts.forEach { it.myLocation = location }
         notifyDataSetChanged()
     }

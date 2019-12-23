@@ -59,9 +59,14 @@ class HomeFragment : Fragment() {
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
 
         homeViewModel.allDisasters.observe(this, Observer { disasters ->
-            disasters?.let{adapter.setDisasters(it)}
+            println("DISASTERS UPDATE")
+            disasters?.let { adapter.setDisasters(it) }
         })
 
+        mLocationController.mLastLocation.observe(this, Observer {
+            println("LOCATION UPDATE")
+            adapter.setLocation(it)
+        })
     }
 
 
