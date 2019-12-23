@@ -1,6 +1,7 @@
 package patti.philippe.read_i.ui.home
 
 import android.content.Context
+import android.location.Location
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,8 @@ class AlertsAdapter internal constructor(context: Context) :
 
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var alerts = emptyList<Alert>()
+    private var mAlerts = emptyList<Alert>()
+    private var mLocation : Location? = null
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val alert: CardView = itemView.findViewById(R.id.alert)
@@ -38,7 +40,7 @@ class AlertsAdapter internal constructor(context: Context) :
     }
 
     override fun onBindViewHolder(holder: AlertViewHolder, position: Int) {
-        val current = alerts[position]
+        val current = mAlerts[position]
         updateDisasterFields(holder, current)
         updateLocationField(holder, current)
 
@@ -77,10 +79,16 @@ class AlertsAdapter internal constructor(context: Context) :
 
     internal fun setDisasters(disasters : List<Disaster>){
         println("in set Disasters")
-        this.alerts = List(disasters.size) { index -> Alert(disasters[index]) }
+        this.mAlerts = List(disasters.size) { index -> Alert(disasters[index], mLocation) }
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = alerts.size
+    internal fun setLocation(location : Location){
+        println("in set Location")
+        this.mAlerts.forEach { it.myLocation = location }
+        notifyDataSetChanged()
+    }
+
+    override fun getItemCount() = mAlerts.size
 
 }
