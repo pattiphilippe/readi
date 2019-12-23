@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import patti.philippe.read_i.R
 import patti.philippe.read_i.db.Alert
@@ -24,11 +22,9 @@ class AlertsAdapter internal constructor(context: Context) :
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var mAlerts = emptyList<Alert>()
     //TODO try with lateinit, to avoid nullable values in Alert
-    private var mLocation : Location? = null
+    private lateinit var mLocation: Location
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val alert: CardView = itemView.findViewById(R.id.alert)
-        val buttonsLayout: LinearLayout = itemView.findViewById(R.id.alertButtons)
         val icon: ImageView = itemView.findViewById(R.id.alerticon)
         val location: TextView = itemView.findViewById(R.id.alertLocation)
         val timestamp: TextView = itemView.findViewById(R.id.alertTimestamp)
@@ -54,10 +50,9 @@ class AlertsAdapter internal constructor(context: Context) :
     }
 
     private fun updateLocationField(holder: AlertViewHolder, current: Alert) {
-        println("in updateLocationField")
         val location = """Coordinates
             |(${current.disaster.latitude} ; ${current.disaster.longitude} ) 
-            |(${current.distanceToMe?.div(1000)?.roundToInt()} km)""".trimMargin()
+            |(${current.mDistanceToMe?.div(1000)?.roundToInt()} km)""".trimMargin()
         holder.location.text = location
     }
 
@@ -79,16 +74,19 @@ class AlertsAdapter internal constructor(context: Context) :
     }
 
     //TODO put setters in a coroutine scope, each waiting the end of the other call, before executing
-    internal fun setDisasters(disasters : List<Disaster>){
-        println("in set Disasters")
-        this.mAlerts = List(disasters.size) { index -> Alert(disasters[index], mLocation) }
+    //TODO notify with payloads
+    internal fun setDisasters(disasters: List<Disaster>) {
+        if (::mLocation.isInitialized) {
+            this.mAlerts = List(disasters.size) { index -> Alert(disasters[index], mLocation) }
+        } else {
+            this.mAlerts = List(disasters.size) { index -> Alert(disasters[index]) }
+        }
         notifyDataSetChanged()
     }
 
-    internal fun setLocation(location : Location){
-        println("in set Location")
+    internal fun setLocation(location: Location) {
         this.mLocation = location
-        this.mAlerts.forEach { it.myLocation = location }
+        this.mAlerts.forEach { it.setDistanceToMe(mLocation)}
         notifyDataSetChanged()
     }
 
