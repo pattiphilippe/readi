@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Read-i</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">read-i</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fbread-i</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -18,4 +23,19 @@
     <string name="alert_btn_moreInfo">More info</string>
     <string name="alert_btn_share">Share</string>
 
+
+    <string name="desc_firebase_lockup">Firebase logo and name</string>
+    <string name="firebase_status_fmt">Firebase UID: %s</string>
+    <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
+    <string name="emailpassword_title_text">Email and Password</string>
+
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="verify_email">Verify Email</string>
+    <string name="auth_failed">Authentication failed</string>
 </resources>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750039450913",
+    "firebase_url": "https://read-i.firebaseio.com",
+    "project_id": "read-i",
+    "storage_bucket": "read-i.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750039450913:android:a334632e3262130523aa60",
+        "android_client_info": {
+          "package_name": "patti.philippe.read_i"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750039450913-hn6cic9v9qptj0ape7it3e4fmsgd8oam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH1vB9NPuWXhsMNPMYUgZzkxgMUOqTwbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750039450913-hn6cic9v9qptj0ape7it3e4fmsgd8oam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

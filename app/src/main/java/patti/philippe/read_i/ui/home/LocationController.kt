@@ -67,11 +67,11 @@ class LocationController(activity: Activity) {
         val builder = AlertDialog.Builder(activity)
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
             .setCancelable(false)
-            .setPositiveButton("Yes") { dialog, id ->
+            .setPositiveButton("Yes") { _, _ ->
                 startActivityForResult(activity, Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
                     11, Bundle.EMPTY)
             }
-            .setNegativeButton("No") { dialog, id ->
+            .setNegativeButton("No") { dialog, _ ->
                 dialog.cancel()
                 dialog.dismiss()
             }
