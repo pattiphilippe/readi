@@ -1,10 +1,7 @@
 package patti.philippe.read_i
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.AttributeSet
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -15,7 +12,7 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
-import android.view.View
+import android.view.MenuItem
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseUser
 import patti.philippe.read_i.auth.EmailPasswordActivity
@@ -23,6 +20,10 @@ import patti.philippe.read_i.auth.EmailPasswordActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    companion object {
+        val EXTRA_SIGN_OUT = "EXTRA_SIGN_OUT"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +60,22 @@ class MainActivity : AppCompatActivity() {
             userEmail.text = user.email
         }
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_settings -> {
+                //TODO define action settings in menu
+            }
+            R.id.action_sign_out -> {
+                val intent = Intent(this, EmailPasswordActivity::class.java).apply{
+                    putExtra(EXTRA_SIGN_OUT, EXTRA_SIGN_OUT)
+                }
+                startActivity(intent)
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
