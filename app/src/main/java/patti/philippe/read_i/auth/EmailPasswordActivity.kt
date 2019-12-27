@@ -1,5 +1,6 @@
 package patti.philippe.read_i.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_emailpassword.signOutButton
 import kotlinx.android.synthetic.main.activity_emailpassword.signedInButtons
 import kotlinx.android.synthetic.main.activity_emailpassword.status
 import kotlinx.android.synthetic.main.activity_emailpassword.verifyEmailButton
+import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
 
 class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
@@ -25,6 +27,11 @@ class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
     // [START declare_auth]
     private lateinit var auth: FirebaseAuth
     // [END declare_auth]
+
+    companion object {
+        val EXTRA_USER = "EXTRA_USER"
+        private const val TAG = "EmailPassword"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,12 +103,14 @@ class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    //TODO launch main view, giving user's info
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
+                    signedIn(auth.currentUser!!)
+                    //updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
+                    //TODO explain error
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -176,15 +185,16 @@ class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
     private fun updateUI(user: FirebaseUser?) {
         hideProgressBar()
         if (user != null) {
-            status.text = getString(R.string.emailpassword_status_fmt,
-                user.email, user.isEmailVerified)
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
-
-            emailPasswordButtons.visibility = View.GONE
-            emailPasswordFields.visibility = View.GONE
-            signedInButtons.visibility = View.VISIBLE
-
-            verifyEmailButton.isEnabled = !user.isEmailVerified
+            signedIn(user)
+//            status.text = getString(R.string.emailpassword_status_fmt,
+//                user.email, user.isEmailVerified)
+//            detail.text = getString(R.string.firebase_status_fmt, user.uid)
+//
+//            emailPasswordButtons.visibility = View.GONE
+//            emailPasswordFields.visibility = View.GONE
+//            signedInButtons.visibility = View.VISIBLE
+//
+//            verifyEmailButton.isEnabled = !user.isEmailVerified
         } else {
             status.setText(R.string.signed_out)
             detail.text = null
@@ -193,6 +203,13 @@ class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
             emailPasswordFields.visibility = View.VISIBLE
             signedInButtons.visibility = View.GONE
         }
+    }
+
+    private fun signedIn(user: FirebaseUser){
+        val intent = Intent(this, MainActivity::class.java).apply{
+            putExtra(EXTRA_USER, user)
+        }
+        startActivity(intent)
     }
 
     override fun onClick(v: View) {
@@ -205,9 +222,6 @@ class EmailPasswordActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
-    companion object {
-        private const val TAG = "EmailPassword"
-    }
 }
 
 

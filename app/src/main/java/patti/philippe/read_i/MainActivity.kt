@@ -1,6 +1,8 @@
 package patti.philippe.read_i
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
@@ -13,6 +15,10 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
+import com.google.firebase.auth.FirebaseUser
+import patti.philippe.read_i.auth.EmailPasswordActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,11 +30,6 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -42,11 +43,21 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
+
+        if(intent.hasExtra(EmailPasswordActivity.EXTRA_USER)){
+            val user : FirebaseUser = intent.getParcelableExtra(EmailPasswordActivity.EXTRA_USER)!!
+            val userName = findViewById<TextView>(R.id.user_name)
+            val userEmail = findViewById<TextView>(R.id.user_email)
+            userName.text = user.email?.substringBefore('@')
+            userEmail.text = user.email
+        }
         return true
     }
 
