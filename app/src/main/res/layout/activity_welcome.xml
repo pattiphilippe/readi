@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_100"
+    android:orientation="vertical"
+    android:weightSum="4">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="15dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            style="@style/ThemeOverlay.Read_iIcon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/desc_read_i_logo"
+            android:src="@mipmap/read_i_logo" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/email_password_fragment"
+        android:name="patti.philippe.read_i.auth.EmailPasswordFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+
+
+</LinearLayout>

@@ -36,4 +36,5 @@
     <string name="sign_out">Sign Out</string>
     <string name="verify_email">Verify Email</string>
     <string name="auth_failed">Authentication failed</string>
+    <string name="sign_in_error">Failed : %1$s</string>
 </resources>

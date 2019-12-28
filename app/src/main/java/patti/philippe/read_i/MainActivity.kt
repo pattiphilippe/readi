@@ -14,8 +14,9 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.addCallback
 import com.google.firebase.auth.FirebaseUser
-import patti.philippe.read_i.auth.EmailPasswordActivity
+import patti.philippe.read_i.auth.EmailPasswordFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        onBackPressedDispatcher.addCallback(this){
+            //TODO ask if he's sure he wants to signOut()
+            signOut()
+        }
     }
 
 
@@ -52,12 +57,13 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
 
-        if(intent.hasExtra(EmailPasswordActivity.EXTRA_USER)){
-            val user : FirebaseUser = intent.getParcelableExtra(EmailPasswordActivity.EXTRA_USER)!!
+        if(intent.hasExtra(EmailPasswordFragment.EXTRA_USER)){
+            val user : FirebaseUser = intent.getParcelableExtra(EmailPasswordFragment.EXTRA_USER)!!
             val userName = findViewById<TextView>(R.id.user_name)
             val userEmail = findViewById<TextView>(R.id.user_email)
             userName.text = user.email?.substringBefore('@')
             userEmail.text = user.email
+            println("has user with email ${user.email}")
         }
         return true
     }
@@ -68,10 +74,7 @@ class MainActivity : AppCompatActivity() {
                 //TODO define action settings in menu
             }
             R.id.action_sign_out -> {
-                val intent = Intent(this, EmailPasswordActivity::class.java).apply{
-                    putExtra(EXTRA_SIGN_OUT, EXTRA_SIGN_OUT)
-                }
-                startActivity(intent)
+                signOut()
             }
 
         }
@@ -83,4 +86,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    private fun signOut(){
+        finish()
+    }
 }
