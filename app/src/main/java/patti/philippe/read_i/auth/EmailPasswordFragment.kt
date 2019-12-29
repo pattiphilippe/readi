@@ -21,18 +21,11 @@ import patti.philippe.read_i.WelcomeActivity
 
 class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
 
-    private lateinit var auth : FirebaseAuth
-
     companion object {
         const val EXTRA_USER = "EXTRA_USER"
         private const val TAG = "EmailPassword"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = FirebaseAuth.getInstance()
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
