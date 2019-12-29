@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_emailpassword.fieldPassword
 import kotlinx.android.synthetic.main.fragment_emailpassword.sign_in_error
 import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
+import patti.philippe.read_i.WelcomeActivity
 
 class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
 
@@ -62,7 +63,6 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
                     Log.d(TAG, "signInWithEmail:success")
                     signedIn(auth.currentUser!!)
                 } else {
-                    //TODO explain error
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                     enableError(true, task.exception?.message)
                     Toast.makeText(
@@ -79,7 +79,7 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra(EXTRA_USER, user)
             }
-            startActivity(intent)
+            startActivityForResult(intent, WelcomeActivity.RC_SIGN_IN)
         }
     }
 
