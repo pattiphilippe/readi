@@ -14,15 +14,13 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseUser
+import patti.philippe.read_i.WelcomeActivity.Companion.EXTRA_USER
 import patti.philippe.read_i.auth.EmailPasswordFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    companion object {
-        val RC_SIGN_OUT = 200
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +52,8 @@ class MainActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
 
-        if (intent.hasExtra(EmailPasswordFragment.EXTRA_USER)) {
-            val user: FirebaseUser = intent.getParcelableExtra(EmailPasswordFragment.EXTRA_USER)!!
+        if (intent.hasExtra(EXTRA_USER)) {
+            val user: FirebaseUser = intent.getParcelableExtra(EXTRA_USER)!!
             val userName = findViewById<TextView>(R.id.user_name)
             val userEmail = findViewById<TextView>(R.id.user_email)
             userName.text = user.email?.substringBefore('@')
@@ -83,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-        setResult(RC_SIGN_OUT)
+        setResult(WelcomeActivity.RsC_SIGN_OUT)
         finish()
     }
 }

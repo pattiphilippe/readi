@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 open class BaseFragment : Fragment(){
 
+    //TODO make abstract with common methods
+
     protected lateinit var auth : FirebaseAuth
     private var progressBar: ProgressBar? = null
 

@@ -8,21 +8,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
+
 import com.google.firebase.auth.FirebaseUser
+
 import kotlinx.android.synthetic.main.fragment_emailpassword.emailSignInButton
 import kotlinx.android.synthetic.main.fragment_emailpassword.emailCreateAccountButton
 import kotlinx.android.synthetic.main.fragment_emailpassword.fieldEmail
 import kotlinx.android.synthetic.main.fragment_emailpassword.fieldPassword
 import kotlinx.android.synthetic.main.fragment_emailpassword.sign_in_error
+
 import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
-import patti.philippe.read_i.WelcomeActivity
+import patti.philippe.read_i.WelcomeActivity.Companion.RqC_SIGN_IN
+import patti.philippe.read_i.WelcomeActivity.Companion.EXTRA_USER
 
 class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
 
+
+    //TODO put logs in methods
+    //TODO check progressBar
+
     companion object {
-        const val EXTRA_USER = "EXTRA_USER"
         private const val TAG = "EmailPassword"
     }
 
@@ -72,7 +78,7 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra(EXTRA_USER, user)
             }
-            startActivityForResult(intent, WelcomeActivity.RC_SIGN_IN)
+            startActivityForResult(intent, RqC_SIGN_IN)
         }
     }
 
@@ -143,8 +149,7 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
+        when (v.id) {
             R.id.emailCreateAccountButton -> createAccount(
                 fieldEmail.text.toString(),
                 fieldPassword.text.toString()
