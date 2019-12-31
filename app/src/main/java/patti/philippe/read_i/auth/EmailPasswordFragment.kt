@@ -1,55 +1,50 @@
 package patti.philippe.read_i.auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-
-import com.google.firebase.auth.FirebaseUser
 
 import kotlinx.android.synthetic.main.fragment_emailpassword.emailSignInButton
 import kotlinx.android.synthetic.main.fragment_emailpassword.emailCreateAccountButton
 import kotlinx.android.synthetic.main.fragment_emailpassword.fieldEmail
 import kotlinx.android.synthetic.main.fragment_emailpassword.fieldPassword
-import kotlinx.android.synthetic.main.fragment_emailpassword.sign_in_error
 
-import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
-import patti.philippe.read_i.WelcomeActivity.Companion.RqC_SIGN_IN
-import patti.philippe.read_i.WelcomeActivity.Companion.EXTRA_USER
 
-class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
+class EmailPasswordFragment : BaseFragment() {
 
 
-    //TODO put logs in methods
-    //TODO check progressBar
-
-    companion object {
-        private const val TAG = "EmailPassword"
-    }
+    override val TAG: String = "EmailPassword"
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_emailpassword, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_emailpassword, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setProgressBar(R.id.progressBar)
+        setError(R.id.sign_in_error)
+    }
+
+
+    override fun initListeners() {
         emailSignInButton.setOnClickListener(this)
         emailCreateAccountButton.setOnClickListener(this)
     }
 
-    private fun signIn(email: String, password: String) {
+    override fun signIn() {
+        super.signIn()
+
+        val email = fieldEmail.text.toString()
+        val password = fieldPassword.text.toString()
+
         Log.d(TAG, "signIn:$email")
+
         if (!validateForm()) {
             return
         }
@@ -63,26 +58,16 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
                     signedIn(auth.currentUser!!)
                 } else {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    enableError(true, task.exception?.message)
-                    Toast.makeText(
-                        requireContext(), "Authentication failed.",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    showError(task.exception!!)
                 }
                 hideProgressBar()
             }
     }
 
-    private fun signedIn(user: FirebaseUser) {
-        context?.let {
-            val intent = Intent(requireContext(), MainActivity::class.java).apply {
-                putExtra(EXTRA_USER, user)
-            }
-            startActivityForResult(intent, RqC_SIGN_IN)
-        }
-    }
+    private fun createAccount() {
+        val email = fieldEmail.text.toString()
+        val password = fieldPassword.text.toString()
 
-    private fun createAccount(email: String, password: String) {
         Log.d(TAG, "createAccount:$email")
         if (!validateForm()) {
             return
@@ -97,16 +82,11 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
                     signedIn(auth.currentUser!!)
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    enableError(true, task.exception?.message)
-                    Toast.makeText(
-                        requireContext(), "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showError(task.exception!!)
                 }
                 hideProgressBar()
             }
     }
-    //TODO add profile page in main activity, with possibility to verify email
 
 
     private fun validateForm(): Boolean {
@@ -115,6 +95,7 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
         val email = fieldEmail.text.toString()
         if (TextUtils.isEmpty(email)) {
             fieldEmail.error = "Required."
+            Log.w(TAG, "Email required!")
             valid = false
         } else {
             fieldEmail.error = null
@@ -123,6 +104,7 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
         val password = fieldPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
             fieldPassword.error = "Required."
+            Log.w(TAG, "Password required!")
             valid = false
         } else {
             fieldPassword.error = null
@@ -131,33 +113,10 @@ class EmailPasswordFragment : BaseFragment(), View.OnClickListener {
         return valid
     }
 
-    private fun enableError(enable: Boolean, error: String? = null) {
-        sign_in_error.isEnabled = enable
-        if (enable) {
-            sign_in_error.visibility = View.VISIBLE
-        } else {
-            sign_in_error.visibility = View.GONE
-        }
-        error?.let {
-            sign_in_error.text = resources.getString(R.string.sign_in_error, error)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        enableError(false)
-    }
-
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.emailCreateAccountButton -> createAccount(
-                fieldEmail.text.toString(),
-                fieldPassword.text.toString()
-            )
-            R.id.emailSignInButton -> signIn(
-                fieldEmail.text.toString(),
-                fieldPassword.text.toString()
-            )
+            R.id.emailCreateAccountButton -> createAccount()
+            R.id.emailSignInButton -> signIn()
         }
     }
 

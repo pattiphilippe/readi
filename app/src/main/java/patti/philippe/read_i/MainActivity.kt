@@ -14,8 +14,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseUser
-import patti.philippe.read_i.WelcomeActivity.Companion.EXTRA_USER
-import patti.philippe.read_i.auth.EmailPasswordFragment
+import patti.philippe.read_i.auth.BaseFragment.Companion.EXTRA_USER
+import patti.philippe.read_i.auth.BaseFragment.Companion.RsC_SIGN_OUT
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-        setResult(WelcomeActivity.RsC_SIGN_OUT)
+        setResult(RsC_SIGN_OUT)
         finish()
     }
 }
