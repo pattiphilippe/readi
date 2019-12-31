@@ -1,6 +1,8 @@
 package patti.philippe.read_i
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseUser
 import patti.philippe.read_i.auth.BaseFragment.Companion.EXTRA_USER
@@ -35,8 +38,8 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send
+                R.id.nav_home, R.id.nav_prepare, R.id.nav_evacuate,
+                R.id.nav_refuges, R.id.nav_donate, R.id.nav_profile, R.id.nav_language
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -47,18 +50,27 @@ class MainActivity : AppCompatActivity() {
         signOut()
     }
 
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        val view = super.onCreateView(name, context, attrs)
+
+        view?.let {
+            //TODO move this to a better spot
+            if (intent.hasExtra(EXTRA_USER)) {
+                val user: FirebaseUser = intent.getParcelableExtra(EXTRA_USER)!!
+                val userName = view.findViewById<TextView>(R.id.user_name)
+                val userEmail = view.findViewById<TextView>(R.id.user_email)
+                userName.text = user.email?.substringBefore('@')
+                userEmail.text = user.email
+            }
+        }
+
+        return view
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-
-        if (intent.hasExtra(EXTRA_USER)) {
-            val user: FirebaseUser = intent.getParcelableExtra(EXTRA_USER)!!
-            val userName = findViewById<TextView>(R.id.user_name)
-            val userEmail = findViewById<TextView>(R.id.user_email)
-            userName.text = user.email?.substringBefore('@')
-            userEmail.text = user.email
-        }
         return true
     }
 

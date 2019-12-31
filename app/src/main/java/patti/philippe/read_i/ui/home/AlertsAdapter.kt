@@ -56,15 +56,16 @@ class AlertsAdapter internal constructor(context: Context) :
         holder.location.text = location
     }
 
+    //TODO link button to prepare page
     private fun getAlertIconId(type: DisasterType) = when (type) {
-        DisasterType.AVALANCHE -> R.drawable.avalanche_icon
-        DisasterType.EARTHQUAKE -> R.drawable.earthquake_icon
-        DisasterType.EXTREME_HEAT -> R.drawable.extreme_heat_icon
-        DisasterType.FIRE -> R.drawable.fire_icon
-        DisasterType.FLOOD -> R.drawable.flood_icon
-        DisasterType.HURRICANE -> R.drawable.hurricane_icon
-        DisasterType.TSUNAMI -> R.drawable.tsunami_icon
-        DisasterType.VOLCANIC_ERUPTION -> R.drawable.volcanic_eruption_icon
+        DisasterType.AVALANCHE -> R.mipmap.avalanche_icon
+        DisasterType.EARTHQUAKE -> R.mipmap.earthquake_icon
+        DisasterType.EXTREME_HEAT -> R.mipmap.extreme_heat_icon
+        DisasterType.FIRE -> R.mipmap.fire_icon
+        DisasterType.FLOOD -> R.mipmap.flood_icon
+        DisasterType.HURRICANE -> R.mipmap.hurricane_icon
+        DisasterType.TSUNAMI -> R.mipmap.tsunami_icon
+        DisasterType.VOLCANIC_ERUPTION -> R.mipmap.volcanic_eruption_icon
     }
 
     private fun getAlertGravityIconId(gravity: DisasterGravity) = when (gravity) {
