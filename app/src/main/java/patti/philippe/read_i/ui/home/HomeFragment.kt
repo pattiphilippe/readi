@@ -2,9 +2,7 @@ package patti.philippe.read_i.ui.home
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
 import patti.philippe.read_i.R
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var homeViewModel: DisasterViewModel
     private lateinit var mLocationController: LocationController
@@ -27,14 +25,6 @@ class HomeFragment : Fragment() {
         super.onCreate(savedInstanceState)
         mLocationController = LocationController(requireActivity())
         homeViewModel = ViewModelProviders.of(this).get(DisasterViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 

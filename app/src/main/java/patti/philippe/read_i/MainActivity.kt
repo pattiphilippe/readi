@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        //TODO only signOut if on home, and dialog "are you sure"?
         signOut()
     }
 

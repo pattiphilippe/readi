@@ -49,4 +49,94 @@
     <string name="prepare_menu_tsunami_button">Prepare menu Tsunami button</string>
     <string name="prepare_menu_volcanic_eruption_button">Prepare menu Volcanic Eruption button</string>
     <string name="prepare_menu_avalanche_button">Prepare menu Avalanche button</string>
+
+    <string name="more_info_btn">Plus d\'informations</string>
+
+
+    <!-- Hurricane -
+    in French for the moment, because translating is difficult, and not the point of this course-->
+
+    <string name="hurr_title_image">Cyclones</string>
+
+
+    <string name="hurr_def_title">Qu\'est-ce que c\'est?</string>
+    <string name="hurr_def">"Les cyclones tropicaux sont des systèmes massifs des tempêtes qui se
+        forment au-dessus des eaux chaudes des océans et se dirigent vers les terres. Les menaces
+        potentielles des cyclones tropicaux (aussi nommés ouragans ou typhons) sont des vents
+        puissatns, de fortes pluies, des ondes de tempêtes, des inondations côtières et à
+        l'intérieur du pays, un flot de retours, des tornades et des éboulements. La saison des
+        cyclones tropicaux d'Atlantique commence le 1er juin et finit le 30 novembre " (Ready, s.d.).
+    </string>
+
+
+    <string name="hurr_bef_section_title">Avant : Se préparer</string>
+    <string name="hurr_bef_cl1_title">Avant une alerte : </string>
+    <string name="hurr_bef_cl1_adv1">Préparer un sac de survie.</string>
+    <string name="hurr_bef_cl1_adv2">Faire régulièrement le plein de la voiture.</string>
+    <string name="hurr_bef_cl1_adv3">Etablir un plan d\'évacuation avec votre famille et un plan de
+        communication en cas de coupure de courant.</string>
+
+
+    <string name="hurr_bef_cl2_title">Quand vous avez reçu une alerte</string>
+    <string name="hurr_bef_cl2_adv1">Suivre régulièrement les informations (application, météo,
+        journal, etc.). N\'écouter que les sources officielles.</string>
+    <string name="hurr_bef_cl2_adv2">Refaire le stock de votre sac de survie s\'il vous manque des
+        choses et vous remémorer votre plan d\'évacuation.</string>
+    <string name="hurr_bef_cl2_adv3">Evacuer rapidement si cela a été demandé.</string>
+    <string name="hurr_bef_cl2_adv4">Si l\'évacuation n\'est pas nécessaire, rentrer toutes les
+        affaires à l\'intérieur de la maison et protéger les fenêtres.</string>
+    <string name="hurr_bef_cl2_adv5">Charger votre téléphone avant une panne de courant éventuelle.
+    </string>
+    <string name="hurr_bef_cl2_adv6">Rester à l\intérieur. Faire savoir à votre famille et vos amis
+        ou vous êtes.</string>
+
+
+    <string name="hurr_whl_section_title">Pendant : Se préparer</string>
+    <string name="hurr_whl_adv1">Utiliser vos bras pour protéger votre tête et votre cou et une
+        couverture pour protéger votre corps.</string>
+    <string name="hurr_whl_adv2">Ne pas marcher, nager ou rouler dans l\'eau.</string>
+    <string name="hurr_whl_adv3">Ne pas marcher sur des ponts au-dessus de courants d\'eau.</string>
+    <string name="hurr_whl_adv4">Ne pas essayer d\'aller plus vite qu\'une tornade ou un cyclone.
+    </string>
+    <string name="hurr_whl_adv5">Si possible, continuer à suivre les informations.</string>
+
+
+    <string name="hurr_aft_section_title">Après : Rester en sécurité et se rétablir</string>
+    <string name="hurr_aft_adv1">Continuer à suivre les informations.</string>
+    <string name="hurr_aft_adv2">Ne pas entrer dans un batiment non sécurisé.</string>
+    <string name="hurr_aft_adv3">Vous protéger pendant le processus de nettoyage.</string>
+    <string name="hurr_aft_adv4">Ne pas toucher les équipements électriques.</string>
+    <string name="hurr_aft_adv5">N\'appeler que les services de secours. Contacter les autres personnes par SMS ou internet.</string>
+    <string name="hurr_aft_adv6">Prendre des photos des dégats.</string>
+
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

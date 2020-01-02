@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/hurr_title_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/hurr_title_image"
+        android:scaleType="fitStart"
+        app:srcCompat="@mipmap/hurricane" />
+
+    <LinearLayout
+        android:id="@+id/hurr_def_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hurr_def_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_def_title"
+            android:theme="@style/ThemeOverlay.SubtitleText"/>
+
+        <TextView
+            android:id="@+id/hurr_def"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_def" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hurr_bef_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hurr_bef_section_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_section_title"
+            android:theme="@style/ThemeOverlay.TitleText"/>
+
+        <TextView
+            android:id="@+id/hurr_bef_cl1_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl1_title"
+            android:theme="@style/ThemeOverlay.SubtitleText"/>
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl1_adv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl1_adv1" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl1_adv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl1_adv2" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl1_adv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl1_adv3" />
+
+        <TextView
+            android:id="@+id/hurr_bef_cl2_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_title"
+            android:theme="@style/ThemeOverlay.SubtitleText"/>
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv1" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv2" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv3" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv4" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv5" />
+
+        <CheckBox
+            android:id="@+id/hurr_bef_cl2_adv6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_bef_cl2_adv6" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hurr_whl_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hurr_whl_section_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_whl_section_title"
+            android:theme="@style/ThemeOverlay.TitleText" />
+
+        <TextView
+            android:id="@+id/hurr_whl_adv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_hands_red"
+            android:drawableLeft="@drawable/ic_hands_red"
+            android:text="@string/hurr_whl_adv1" />
+
+        <TextView
+            android:id="@+id/hurr_whl_adv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_swimmer_red"
+            android:drawableLeft="@drawable/ic_swimmer_red"
+            android:text="@string/hurr_whl_adv2" />
+
+        <TextView
+            android:id="@+id/hurr_whl_adv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_bridge_red"
+            android:drawableLeft="@drawable/ic_bridge_red"
+            android:text="@string/hurr_whl_adv3" />
+
+        <TextView
+            android:id="@+id/hurr_whl_adv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_runner_red"
+            android:drawableLeft="@drawable/ic_runner_red"
+            android:text="@string/hurr_whl_adv4" />
+
+        <TextView
+            android:id="@+id/hurr_whl_adv5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_radio_red"
+            android:drawableLeft="@drawable/ic_radio_red"
+            android:text="@string/hurr_whl_adv5" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hurr_aft_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hurr_aft_section_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hurr_aft_section_title"
+            android:theme="@style/ThemeOverlay.TitleText"/>
+
+        <TextView
+            android:id="@+id/hurr_aft_adv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_radio"
+            android:drawableLeft="@drawable/ic_radio"
+            android:text="@string/hurr_aft_adv1" />
+
+        <TextView
+            android:id="@+id/hurr_aft_adv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_building"
+            android:drawableLeft="@drawable/ic_building"
+            android:text="@string/hurr_aft_adv2" />
+
+        <TextView
+            android:id="@+id/hurr_aft_adv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_cleaning"
+            android:drawableLeft="@drawable/ic_cleaning"
+            android:text="@string/hurr_aft_adv3" />
+
+        <TextView
+            android:id="@+id/hurr_aft_adv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_electricity"
+            android:drawableLeft="@drawable/ic_electricity"
+            android:text="@string/hurr_aft_adv4" />
+
+        <TextView
+            android:id="@+id/hurr_aft_adv5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_phone"
+            android:drawableLeft="@drawable/ic_phone"
+            android:text="@string/hurr_aft_adv5" />
+
+        <TextView
+            android:id="@+id/hurr_aft_adv6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_picture"
+            android:drawableLeft="@drawable/ic_picture"
+            android:text="@string/hurr_aft_adv6" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/hurr_info_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/more_info_btn" />
+</LinearLayout>

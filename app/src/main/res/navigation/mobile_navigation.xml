@@ -9,12 +9,26 @@
         android:id="@+id/nav_home"
         android:name="patti.philippe.read_i.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_prepare"
+            app:destination="@id/nav_prepare" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_prepare"
         android:name="patti.philippe.read_i.ui.prepare.PrepareMenuFragment"
         android:label="@string/menu_prepare"
-        tools:layout="@layout/fragment_prepare_menu" />
+        tools:layout="@layout/fragment_prepare_menu" >
+        <action
+            android:id="@+id/action_nav_prepare_to_hurricaneFragment"
+            app:destination="@id/fragment_hurricane" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_hurricane"
+        android:name="patti.philippe.read_i.ui.prepare.HurricaneFragment"
+        android:label="HurricaneFragment"
+        tools:layout="@layout/fragment_hurricane"/>
 
 </navigation>

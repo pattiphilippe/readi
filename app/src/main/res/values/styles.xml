@@ -44,8 +44,15 @@
     </style>
 
 
-    <style name="ThemeOverlay.MyTitleText" parent="AppTheme">
+    <style name="ThemeOverlay.TitleText" parent="AppTheme">
         <item name="android:gravity">center</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">#6666ff</item>
+        <item name="android:text">#6666ff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ThemeOverlay.SubtitleText" parent="AppTheme">
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>
