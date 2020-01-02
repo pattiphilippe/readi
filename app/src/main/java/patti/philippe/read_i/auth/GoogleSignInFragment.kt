@@ -95,10 +95,10 @@ class GoogleSignInFragment : BaseFragment() {
     }
 
     override fun onClick(v: View) {
-        println("on Click in GoogleSignInFragment")
+        Log.d(TAG,"on Click in GoogleSignInFragment")
         when (v.id) {
             R.id.button_sign_in_google -> signIn()
-            else -> println("clicked, but no handling")
+            else -> Log.w(TAG, "clicked, but no handling")
         }
     }
 }

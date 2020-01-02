@@ -1,5 +1,7 @@
 package patti.philippe.read_i.ui.prepare
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,6 +19,8 @@ class PrepareMenuFragment : Fragment(R.layout.fragment_prepare_menu), View.OnCli
         super.onViewCreated(view, savedInstanceState)
 
         prepare_menu_hurricane_button.setOnClickListener(this)
+        prepare_menu_extreme_heat_button.setOnClickListener(this)
+        prepare_menu_flood_button.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -24,6 +28,10 @@ class PrepareMenuFragment : Fragment(R.layout.fragment_prepare_menu), View.OnCli
         var action = when (v?.id) {
             R.id.prepare_menu_hurricane_button ->
                 PrepareMenuFragmentDirections.actionNavPrepareToHurricaneFragment()
+            R.id.prepare_menu_extreme_heat_button ->
+                PrepareMenuFragmentDirections.actionNavPrepareToFragmentExtremeHeat()
+            R.id.prepare_menu_flood_button ->
+                PrepareMenuFragmentDirections.actionNavPrepareToFragmentFlood()
             else -> null
         }
         if (action != null && v != null) {

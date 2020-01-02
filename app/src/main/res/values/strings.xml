@@ -91,7 +91,7 @@
         ou vous êtes.</string>
 
 
-    <string name="hurr_whl_section_title">Pendant : Se préparer</string>
+    <string name="hurr_whl_section_title">Pendant : Se protéger</string>
     <string name="hurr_whl_adv1">Utiliser vos bras pour protéger votre tête et votre cou et une
         couverture pour protéger votre corps.</string>
     <string name="hurr_whl_adv2">Ne pas marcher, nager ou rouler dans l\'eau.</string>
@@ -106,8 +106,121 @@
     <string name="hurr_aft_adv2">Ne pas entrer dans un batiment non sécurisé.</string>
     <string name="hurr_aft_adv3">Vous protéger pendant le processus de nettoyage.</string>
     <string name="hurr_aft_adv4">Ne pas toucher les équipements électriques.</string>
-    <string name="hurr_aft_adv5">N\'appeler que les services de secours. Contacter les autres personnes par SMS ou internet.</string>
+    <string name="hurr_aft_adv5">N\'appeler que les services de secours. Contacter les autres
+        personnes par SMS ou internet.</string>
     <string name="hurr_aft_adv6">Prendre des photos des dégats.</string>
+
+
+    <string name="hurr_info_website">https://www.ready.gov/hurricanes</string>
+
+
+
+    <!-- Extreme Heat  -
+    in French for the moment, because translating is difficult, and not the point of this course-->
+
+    <string name="heat_title">Vagues de chaleur</string>
+
+
+    <string name="heat_def_title">Qu\'est-ce que c\'est?</string>
+    <string name="heat_def">Les vagues de chaleur sont caractérisées comme étant de longues périodes
+        (2 à 3 jours minimum) d\'humidité et de hautes températures (au-dessus des 32° Celsius). Si,
+        en plus, il ne pleut pas suffisamment pendant une longue période de temps, cela peut
+        engendrer des sécheresses.
+    </string>
+
+
+    <string name="heat_bef_section_title">Avant : Se préparer</string>
+    <string name="heat_bef_cl1_title">Avant une alerte : </string>
+    <string name="heat_bef_cl1_adv1">Préparer un sac de survie. Toujours avoir de l\'eau en
+        suffisance.</string>
+
+    <string name="heat_bef_cl2_title">Quand vous avez reçu une alerte</string>
+    <string name="heat_bef_cl2_adv1">Suivre régulièrement les informations (application, météo,
+        journal, etc.). N\'écouter que les sources officielles.</string>
+    <string name="heat_bef_cl2_adv2">Refaire le stock de votre sac de survie s\'il vous manque des
+        choses et vous remémorer votre plan d\'évacuation.</string>
+    <string name="heat_bef_cl2_adv3">Prendre régulièrement des nouvelles des membres de votre
+        famille, de vos proches, de vos voisins et des personnes de votre entourage ayant des
+        problèmes de santé.</string>
+
+
+    <string name="heat_whl_section_title">Pendant : Se protéger</string>
+    <string name="heat_whl_adv1">Si interdit, respecter les ordres sur l\'utilisation de l\'eau.</string>
+    <string name="heat_whl_adv2">Trouver des endroits avec de l\'air conditionné (pas des
+        ventilateurs, ils sont conducteurs de problèmes de santé liés à la chaleur).</string>
+    <string name="heat_whl_adv3">Rester hydraté. Eviter les activités intenses. Porter des vêtements
+        légers et se protéger (crème solaire, casquette).</string>
+    <string name="heat_whl_adv4">Faire attention aux maladies liées à la chaleur (vérifier aussi les
+        voisins, amis, membres de la famille et surtout les personnes agées et à mobilité réduite).
+    </string>
+    <string name="heat_whl_adv5">Ne jamais laisser enfants ou animaux dans une voiture fermée.</string>
+    <string name="heat_whl_adv6">Garder la maison fraiche, par exemple en couvrant les fenêtres avec
+        des draps.</string>
+
+
+    <string name="heat_info_website">https://www.ready.gov/heat</string>
+
+
+    <!-- Flood  -
+    in French for the moment, because translating is difficult, and not the point of this course-->
+
+    <string name="flood_title">Inondations</string>
+
+
+    <string name="flood_def_title">Qu\'est-ce que c\'est?</string>
+    <string name="flood_def">Les inondations peuvent faire leur apparition suite à de la pluie, de la
+        neige, des tempêtes, des débordements de digues ou d\'autres systèmes hydrauliques.
+    </string>
+
+
+    <string name="flood_bef_section_title">Avant : Se préparer</string>
+    <string name="flood_bef_cl1_title">Avant une alerte : </string>
+    <string name="flood_bef_cl1_adv1">Préparer un sac de survie et acheter de l\'eau en suffisance.
+    </string>
+    <string name="flood_bef_cl1_adv2">Faire régulièrement le plein de la voiture.</string>
+    <string name="flood_bef_cl1_adv3">Etablir un plan d\'évacuation avec votre famille et un plan de
+        communication en cas de coupure de courant.</string>
+
+
+    <string name="flood_bef_cl2_title">Quand vous avez reçu une alerte</string>
+    <string name="flood_bef_cl2_adv1">Suivre régulièrement les informations (application, météo,
+        journal, etc.). N\'écouter que les sources officielles.</string>
+    <string name="flood_bef_cl2_adv2">Refaire le stock de votre sac de survie s\'il vous manque des
+        choses et vous remémorer votre plan d\'évacuation.</string>
+    <string name="flood_bef_cl2_adv3">Evacuer rapidement si cela a été demandé. Se déplacer vers des
+        terrains surélevés. Ne jamais rouler là où il y a des barricades.</string>
+    <string name="flood_bef_cl2_adv4">Charger votre téléphone avant une panne de courant éventuelle.
+    </string>
+    <string name="flood_bef_cl2_adv5">Rester à l\intérieur. Faire savoir à votre famille et vos amis
+        ou vous êtes.</string>
+
+
+    <string name="flood_whl_section_title">Pendant : Se protéger</string>
+    <string name="flood_whl_adv1">Si la voiture est coincée dans un courant d\'eau, restez à
+        l\'intérieur. Si l\'eau rentre dans la voiture, se mettre sur le toit de la voiture.</string>
+    <string name="flood_whl_adv2">Si vous êtes coincés dans un bâtiment, aller à l\'étage le plus
+        haut (pas un grenier fermé). Si nécessaire, monter sur le toit et appeler au secours.</string>
+    <string name="flood_whl_adv3">Utiliser vos bras pour protéger votre tête et votre cou et une
+        couverture pour protéger votre corps.</string>
+    <string name="flood_whl_adv4">Ne pas marcher, nager ou rouler dans l\'eau.</string>
+    <string name="flood_whl_adv5">Ne pas marcher sur des ponts au-dessus de courants d\'eau.</string>
+    <string name="flood_whl_adv6">Ne pas essayer d\'aller plus vite qu\'une inondations.
+    </string>
+    <string name="flood_whl_adv7">Si possible, continuer à suivre les informations.</string>
+
+
+    <string name="flood_aft_section_title">Après : Rester en sécurité et se rétablir</string>
+    <string name="flood_aft_adv1">Continuer à suivre les informations.</string>
+    <string name="flood_aft_adv2">Porter des gants et des bottes. Présence d\'animaux ou d\'objets
+        coupants dans l\'eau.</string>
+    <string name="flood_aft_adv3">Vous protéger pendant le processus de nettoyage.</string>
+    <string name="flood_aft_adv4">Ne pas toucher les équipements électriques.</string>
+    <string name="flood_aft_adv5">N\'appeler que les services de secours. Contacter les autres
+        personnes par SMS ou internet.</string>
+    <string name="flood_aft_adv6">Prendre des photos des dégats.</string>
+
+
+    <string name="flood_info_website">https://www.ready.gov/floods</string>
 
 </resources>
 

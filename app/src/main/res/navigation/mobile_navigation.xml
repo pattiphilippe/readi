@@ -23,6 +23,12 @@
         <action
             android:id="@+id/action_nav_prepare_to_hurricaneFragment"
             app:destination="@id/fragment_hurricane" />
+        <action
+            android:id="@+id/action_nav_prepare_to_fragment_extreme_heat"
+            app:destination="@id/fragment_extreme_heat" />
+        <action
+            android:id="@+id/action_nav_prepare_to_fragment_flood"
+            app:destination="@id/fragment_flood" />
     </fragment>
 
     <fragment
@@ -30,5 +36,17 @@
         android:name="patti.philippe.read_i.ui.prepare.HurricaneFragment"
         android:label="@string/hurr_title"
         tools:layout="@layout/fragment_hurricane" />
+
+    <fragment
+        android:id="@+id/fragment_extreme_heat"
+        android:name="patti.philippe.read_i.ui.prepare.ExtremeHeatFragment"
+        android:label="@string/heat_title"
+        tools:layout="@layout/fragment_extreme_heat" />
+
+    <fragment
+        android:id="@+id/fragment_flood"
+        android:name="patti.philippe.read_i.ui.prepare.FloodFragment"
+        android:label="@string/flood_title"
+        tools:layout="@layout/fragment_flood" />
 
 </navigation>
