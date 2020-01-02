@@ -16,6 +16,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.activity.addCallback
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseUser
 import patti.philippe.read_i.auth.BaseFragment.Companion.EXTRA_USER
 import patti.philippe.read_i.auth.BaseFragment.Companion.RsC_SIGN_OUT
@@ -46,10 +48,6 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    override fun onBackPressed() {
-        //TODO only signOut if on home, and dialog "are you sure"?
-        signOut()
-    }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         val view = super.onCreateView(name, context, attrs)
@@ -93,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    private fun signOut() {
+    fun signOut(){
         setResult(RsC_SIGN_OUT)
         finish()
     }

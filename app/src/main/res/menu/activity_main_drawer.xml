@@ -10,7 +10,7 @@
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_prepare"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_prepare_black_24dp"
             android:title="@string/menu_prepare" />
         <item
             android:id="@+id/nav_evacuate"

@@ -4,12 +4,14 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
+import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -25,6 +27,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onCreate(savedInstanceState)
         mLocationController = LocationController(requireActivity())
         homeViewModel = ViewModelProviders.of(this).get(DisasterViewModel::class.java)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            if(requireActivity() is MainActivity){
+                (requireActivity() as MainActivity).signOut()
+            }
+        }
     }
 
 
