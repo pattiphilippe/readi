@@ -69,19 +69,19 @@
             android:gravity="end">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/alert_evacuate_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_directions_run_24dp" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/alert_info_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_info_outline_24dp" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/alert_share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_share_24dp" />

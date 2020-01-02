@@ -13,6 +13,15 @@
         <action
             android:id="@+id/action_nav_home_to_nav_prepare"
             app:destination="@id/nav_prepare" />
+        <action
+            android:id="@+id/action_nav_home_to_fragment_hurricane"
+            app:destination="@id/fragment_hurricane" />
+        <action
+            android:id="@+id/action_nav_home_to_fragment_flood"
+            app:destination="@id/fragment_flood" />
+        <action
+            android:id="@+id/action_nav_home_to_fragment_extreme_heat"
+            app:destination="@id/fragment_extreme_heat" />
     </fragment>
 
     <fragment
