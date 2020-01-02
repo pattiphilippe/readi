@@ -95,4 +95,6 @@ class MainActivity : AppCompatActivity() {
         setResult(RsC_SIGN_OUT)
         finish()
     }
+
+    //TODO PAGE ABOUT : ICONS BY ICONS8
 }

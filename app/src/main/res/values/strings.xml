@@ -56,7 +56,7 @@
     <!-- Hurricane -
     in French for the moment, because translating is difficult, and not the point of this course-->
 
-    <string name="hurr_title_image">Cyclones</string>
+    <string name="hurr_title">Cyclones</string>
 
 
     <string name="hurr_def_title">Qu\'est-ce que c\'est?</string>

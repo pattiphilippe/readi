@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/fragment_hurricane"
         android:name="patti.philippe.read_i.ui.prepare.HurricaneFragment"
-        android:label="HurricaneFragment"
-        tools:layout="@layout/fragment_hurricane"/>
+        android:label="@string/hurr_title"
+        tools:layout="@layout/fragment_hurricane" />
 
 </navigation>

@@ -15,11 +15,9 @@
             android:id="@+id/hurr_title_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/hurr_title_image"
-            android:scaleType="fitStart"
             app:srcCompat="@mipmap/hurricane"
-            android:layout_marginBottom="10dp"/>
+            android:contentDescription="@string/hurr_title"
+            android:theme="@style/PrepareTitleImage"/>
 
         <LinearLayout
             android:id="@+id/hurr_def_section"
@@ -33,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_def_title"
-                android:theme="@style/ThemeOverlay.SubtitleText" />
+                android:theme="@style/PrepareSubtitleText" />
 
             <TextView
                 android:id="@+id/hurr_def"
@@ -54,14 +52,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_bef_section_title"
-                android:theme="@style/ThemeOverlay.TitleText" />
+                android:theme="@style/PrepareTitleText" />
 
             <TextView
                 android:id="@+id/hurr_bef_cl1_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_bef_cl1_title"
-                android:theme="@style/ThemeOverlay.SubtitleText" />
+                android:theme="@style/PrepareSubtitleText" />
 
             <CheckBox
                 android:id="@+id/hurr_bef_cl1_adv1"
@@ -86,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_bef_cl2_title"
-                android:theme="@style/ThemeOverlay.SubtitleText" />
+                android:theme="@style/PrepareSubtitleText" />
 
             <CheckBox
                 android:id="@+id/hurr_bef_cl2_adv1"
@@ -138,46 +136,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_whl_section_title"
-                android:theme="@style/ThemeOverlay.TitleText" />
+                android:theme="@style/PrepareTitleText" />
 
             <TextView
                 android:id="@+id/hurr_whl_adv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_hands_red"
-                android:drawableLeft="@drawable/ic_hands_red"
+                android:drawableStart="@drawable/icons8_arms_up_red_40"
+                android:drawableLeft="@drawable/icons8_arms_up_red_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_whl_adv1" />
 
             <TextView
                 android:id="@+id/hurr_whl_adv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_swimmer_red"
-                android:drawableLeft="@drawable/ic_swimmer_red"
+                android:drawableStart="@drawable/icons8_swimming_red_40"
+                android:drawableLeft="@drawable/icons8_swimming_red_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_whl_adv2" />
 
             <TextView
                 android:id="@+id/hurr_whl_adv3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_bridge_red"
-                android:drawableLeft="@drawable/ic_bridge_red"
+                android:drawableStart="@drawable/icons8_bridge_red_40"
+                android:drawableLeft="@drawable/icons8_bridge_red_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_whl_adv3" />
 
             <TextView
                 android:id="@+id/hurr_whl_adv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_runner_red"
-                android:drawableLeft="@drawable/ic_runner_red"
+                android:drawableStart="@drawable/icons8_running_red_40"
+                android:drawableLeft="@drawable/icons8_running_red_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_whl_adv4" />
 
             <TextView
                 android:id="@+id/hurr_whl_adv5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_radio_red"
-                android:drawableLeft="@drawable/ic_radio_red"
+                android:drawableStart="@drawable/icons8_radio_red_40"
+                android:drawableLeft="@drawable/icons8_radio_red_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_whl_adv5" />
 
         </LinearLayout>
@@ -194,54 +197,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/hurr_aft_section_title"
-                android:theme="@style/ThemeOverlay.TitleText" />
+                android:theme="@style/PrepareTitleText" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_radio"
-                android:drawableLeft="@drawable/ic_radio"
+                android:drawableStart="@drawable/icons8_radio_40"
+                android:drawableLeft="@drawable/icons8_radio_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv1" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_building"
-                android:drawableLeft="@drawable/ic_building"
+                android:drawableStart="@drawable/icons8_building_40"
+                android:drawableLeft="@drawable/icons8_building_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv2" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_cleaning"
-                android:drawableLeft="@drawable/ic_cleaning"
+                android:drawableStart="@drawable/icons8_broom_40"
+                android:drawableLeft="@drawable/icons8_broom_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv3" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_electricity"
-                android:drawableLeft="@drawable/ic_electricity"
+                android:drawableStart="@drawable/icons8_electricity_40"
+                android:drawableLeft="@drawable/icons8_electricity_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv4" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_phone"
-                android:drawableLeft="@drawable/ic_phone"
+                android:drawableStart="@drawable/icons8_phone_40"
+                android:drawableLeft="@drawable/icons8_phone_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv5" />
 
             <TextView
                 android:id="@+id/hurr_aft_adv6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_picture"
-                android:drawableLeft="@drawable/ic_picture"
+                android:drawableStart="@drawable/icons8_camera_40"
+                android:drawableLeft="@drawable/icons8_camera_40"
+                android:theme="@style/PrepareTextDrawable"
                 android:text="@string/hurr_aft_adv6" />
         </LinearLayout>
 
