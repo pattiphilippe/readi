@@ -3,7 +3,6 @@ package patti.philippe.read_i.db
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
-import kotlin.Comparator
 
 
 @Entity(tableName = "disaster_table")

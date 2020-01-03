@@ -17,6 +17,8 @@ import patti.philippe.read_i.db.DisasterType.*
 import patti.philippe.read_i.ui.home.HomeFragmentDirections.Companion.actionNavHomeToFragmentExtremeHeat
 import patti.philippe.read_i.ui.home.HomeFragmentDirections.Companion.actionNavHomeToFragmentFlood
 import patti.philippe.read_i.ui.home.HomeFragmentDirections.Companion.actionNavHomeToFragmentHurricane
+import java.text.DateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 class AlertsAdapter internal constructor(context: Context) :
@@ -27,6 +29,7 @@ class AlertsAdapter internal constructor(context: Context) :
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var mAlerts = mutableListOf<Alert>()
     private lateinit var mLocation: Location
+    private val dateFormatter = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale("en", "US"))
     private val comparator = ComparatorGravity().thenBy{it.mDistanceToMe}
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
@@ -72,7 +75,7 @@ class AlertsAdapter internal constructor(context: Context) :
 
     private fun updateDisasterFields(holder: AlertViewHolder, current: Alert) {
         holder.icon.setImageResource(getAlertIconId(current.disaster.type))
-        holder.timestamp.text = current.disaster.date.toString()
+        holder.timestamp.text = dateFormatter.format(current.disaster.date)
         holder.gravityIcon.setImageResource(getAlertGravityIconId(current.disaster.gravity))
     }
 
