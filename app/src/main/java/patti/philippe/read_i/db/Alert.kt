@@ -21,3 +21,17 @@ data class Alert(val disaster: Disaster) {
     }
 
 }
+
+class ComparatorGravity : Comparator<Alert> {
+    override fun compare(o1: Alert?, o2: Alert?): Int {
+        if (o1?.disaster?.gravity == o2?.disaster?.gravity) return 0
+        if (o1 == null && o2 != null) return 1
+        if (o1 != null && o2 == null) return -1
+        if (o1!!.disaster.gravity == DisasterGravity.CRITICAL) return -1
+        if (o2!!.disaster.gravity == DisasterGravity.CRITICAL) return 1
+        if (o1.disaster.gravity == DisasterGravity.WARNING) {
+            return -1
+        }
+        return 1
+    }
+}

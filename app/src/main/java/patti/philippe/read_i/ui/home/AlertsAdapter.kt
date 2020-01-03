@@ -12,10 +12,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import patti.philippe.read_i.R
-import patti.philippe.read_i.db.Alert
-import patti.philippe.read_i.db.Disaster
-import patti.philippe.read_i.db.DisasterGravity
-import patti.philippe.read_i.db.DisasterType
+import patti.philippe.read_i.db.*
 import patti.philippe.read_i.db.DisasterType.*
 import patti.philippe.read_i.ui.home.HomeFragmentDirections.Companion.actionNavHomeToFragmentExtremeHeat
 import patti.philippe.read_i.ui.home.HomeFragmentDirections.Companion.actionNavHomeToFragmentFlood
@@ -28,8 +25,9 @@ class AlertsAdapter internal constructor(context: Context) :
     private val _tag = "AlertsAdapter"
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var mAlerts = emptyList<Alert>()
+    private var mAlerts = mutableListOf<Alert>()
     private lateinit var mLocation: Location
+    private val comparator = ComparatorGravity().thenBy{it.mDistanceToMe}
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
@@ -109,16 +107,18 @@ class AlertsAdapter internal constructor(context: Context) :
     //TODO notify with payloads
     internal fun setDisasters(disasters: List<Disaster>) {
         if (::mLocation.isInitialized) {
-            this.mAlerts = List(disasters.size) { index -> Alert(disasters[index], mLocation) }
+            this.mAlerts = MutableList(disasters.size) { index -> Alert(disasters[index], mLocation) }
         } else {
-            this.mAlerts = List(disasters.size) { index -> Alert(disasters[index]) }
+            this.mAlerts = MutableList(disasters.size) { index -> Alert(disasters[index]) }
         }
+        this.mAlerts.sortWith(comparator)
         notifyDataSetChanged()
     }
 
     internal fun setLocation(location: Location) {
         this.mLocation = location
         this.mAlerts.forEach { it.setDistanceToMe(mLocation) }
+        this.mAlerts.sortWith(comparator)
         notifyDataSetChanged()
     }
 
