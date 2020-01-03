@@ -1,7 +1,5 @@
 package patti.philippe.read_i.ui.prepare
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,8 +10,10 @@ import patti.philippe.read_i.R
 
 class PrepareMenuFragment : Fragment(R.layout.fragment_prepare_menu), View.OnClickListener {
 
-    private val TAG = "PrepareMenuFragment"
+    private val _tag = "PrepareMenuFragment"
 
+    //TODO check tags in every class
+    //TODO use dimensions in styles and views
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,8 +24,8 @@ class PrepareMenuFragment : Fragment(R.layout.fragment_prepare_menu), View.OnCli
     }
 
     override fun onClick(v: View?) {
-        Log.d(TAG, "onClick handler")
-        var action = when (v?.id) {
+        Log.d(_tag, "onClick handler")
+        val action = when (v?.id) {
             R.id.prepare_menu_hurricane_button ->
                 PrepareMenuFragmentDirections.actionNavPrepareToHurricaneFragment()
             R.id.prepare_menu_extreme_heat_button ->
@@ -35,7 +35,7 @@ class PrepareMenuFragment : Fragment(R.layout.fragment_prepare_menu), View.OnCli
             else -> null
         }
         if (action != null && v != null) {
-            Log.d(TAG, "switching to new fragment")
+            Log.d(_tag, "switching to new fragment")
             v.findNavController().navigate(action)
         }
     }

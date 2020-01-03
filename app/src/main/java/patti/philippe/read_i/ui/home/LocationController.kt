@@ -20,8 +20,8 @@ import com.google.android.gms.location.*
 class LocationController(activity: Activity) {
 
 
-    private val INTERVAL: Long = 20000
-    private val FASTEST_INTERVAL: Long = 10000
+    private val _interval: Long = 20000
+    private val _fastestInterval: Long = 10000
     private val mLocationRequest = LocationRequest()
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     val mLastLocation: MutableLiveData<Location> = MutableLiveData()
@@ -32,7 +32,6 @@ class LocationController(activity: Activity) {
         }
     }
 
-    //TODO ? companion object and "static" methods" for all the methods in this class?
 
     init {
         mLocationRequest
@@ -44,7 +43,6 @@ class LocationController(activity: Activity) {
     }
 
     fun checkPermissionForLocation(activity: Activity) =
-        //TODO check following line
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED
@@ -82,8 +80,8 @@ class LocationController(activity: Activity) {
     fun startLocationUpdates(activity: Activity) {
         mLocationRequest.apply {
             priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
-            interval = INTERVAL
-            fastestInterval = FASTEST_INTERVAL
+            interval = _interval
+            fastestInterval = _fastestInterval
         }
 
         val builder = LocationSettingsRequest.Builder()

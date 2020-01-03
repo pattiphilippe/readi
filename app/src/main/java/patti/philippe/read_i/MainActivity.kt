@@ -1,30 +1,30 @@
 package patti.philippe.read_i
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
-import androidx.activity.addCallback
-import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseUser
 import patti.philippe.read_i.auth.BaseFragment.Companion.EXTRA_USER
 import patti.philippe.read_i.auth.BaseFragment.Companion.RsC_SIGN_OUT
 
 class MainActivity : AppCompatActivity() {
 
+    //TODO use drawable values
+
+    //TODO press back closes navigation drawer
+
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mainViewModel: MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        mainViewModel = MainViewModel(application)
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -46,24 +48,24 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (intent.hasExtra(EXTRA_USER)) {
+            val user: FirebaseUser = intent.getParcelableExtra(EXTRA_USER)!!
+            mainViewModel.currentUser = user
+            updateViewUser()
+        }
+        updateViewUser()
+
     }
 
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        val view = super.onCreateView(name, context, attrs)
-
-        view?.let {
-            //TODO move this to a better spot
-            if (intent.hasExtra(EXTRA_USER)) {
-                val user: FirebaseUser = intent.getParcelableExtra(EXTRA_USER)!!
-                val userName = view.findViewById<TextView>(R.id.user_name)
-                val userEmail = view.findViewById<TextView>(R.id.user_email)
-                userName.text = user.email?.substringBefore('@')
-                userEmail.text = user.email
-            }
-        }
-
-        return view
+    private fun updateViewUser() {
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val user = mainViewModel.currentUser!!
+        val hView = navView.getHeaderView(0)
+        val userName = hView.findViewById<TextView>(R.id.user_name)
+        val userEmail = hView.findViewById<TextView>(R.id.user_email)
+        userName.text = user.email?.substringBefore('@')
+        userEmail.text = user.email
     }
 
 
@@ -81,7 +83,10 @@ class MainActivity : AppCompatActivity() {
             R.id.action_sign_out -> {
                 signOut()
             }
-
+            R.id.nav_prepare -> {
+                println("COULD ALSO DO IT HERE BEFORE NAVIGATE")
+            }
+            else -> println(" clicked but not handled")
         }
         return super.onOptionsItemSelected(item)
     }
@@ -91,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun signOut(){
+    fun signOut() {
         setResult(RsC_SIGN_OUT)
         finish()
     }

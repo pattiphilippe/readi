@@ -10,5 +10,7 @@ class DisasterRepository (private val disasterDao: DisasterDao){
         disasterDao.insert(disaster)
     }
 
+    //TODO filter disasters
+
 
 }

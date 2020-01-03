@@ -3,28 +3,15 @@ package patti.philippe.read_i.auth
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-
-import kotlinx.android.synthetic.main.fragment_emailpassword.emailSignInButton
-import kotlinx.android.synthetic.main.fragment_emailpassword.emailCreateAccountButton
-import kotlinx.android.synthetic.main.fragment_emailpassword.fieldEmail
-import kotlinx.android.synthetic.main.fragment_emailpassword.fieldPassword
-
+import kotlinx.android.synthetic.main.fragment_emailpassword.*
 import patti.philippe.read_i.R
 
-class EmailPasswordFragment : BaseFragment() {
+class EmailPasswordFragment : BaseFragment(R.layout.fragment_emailpassword) {
 
 
-    override val TAG: String = "EmailPassword"
+    override val mTag: String = "EmailPassword"
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_emailpassword, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +30,7 @@ class EmailPasswordFragment : BaseFragment() {
         val email = fieldEmail.text.toString()
         val password = fieldPassword.text.toString()
 
-        Log.d(TAG, "signIn:$email")
+        Log.d(mTag, "signIn:$email")
 
         if (!validateForm()) {
             return
@@ -54,10 +41,10 @@ class EmailPasswordFragment : BaseFragment() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "signInWithEmail:success")
+                    Log.d(mTag, "signInWithEmail:success")
                     signedIn(auth.currentUser!!)
                 } else {
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Log.w(mTag, "signInWithEmail:failure", task.exception)
                     showError(task.exception!!)
                 }
                 hideProgressBar()
@@ -68,7 +55,7 @@ class EmailPasswordFragment : BaseFragment() {
         val email = fieldEmail.text.toString()
         val password = fieldPassword.text.toString()
 
-        Log.d(TAG, "createAccount:$email")
+        Log.d(mTag, "createAccount:$email")
         if (!validateForm()) {
             return
         }
@@ -78,10 +65,10 @@ class EmailPasswordFragment : BaseFragment() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "createUserWithEmail:success")
+                    Log.d(mTag, "createUserWithEmail:success")
                     signedIn(auth.currentUser!!)
                 } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Log.w(mTag, "createUserWithEmail:failure", task.exception)
                     showError(task.exception!!)
                 }
                 hideProgressBar()
@@ -95,7 +82,7 @@ class EmailPasswordFragment : BaseFragment() {
         val email = fieldEmail.text.toString()
         if (TextUtils.isEmpty(email)) {
             fieldEmail.error = "Required."
-            Log.w(TAG, "Email required!")
+            Log.w(mTag, "Email required!")
             valid = false
         } else {
             fieldEmail.error = null
@@ -104,7 +91,7 @@ class EmailPasswordFragment : BaseFragment() {
         val password = fieldPassword.text.toString()
         if (TextUtils.isEmpty(password)) {
             fieldPassword.error = "Required."
-            Log.w(TAG, "Password required!")
+            Log.w(mTag, "Password required!")
             valid = false
         } else {
             fieldPassword.error = null

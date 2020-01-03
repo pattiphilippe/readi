@@ -25,23 +25,22 @@ import kotlin.math.roundToInt
 class AlertsAdapter internal constructor(context: Context) :
     RecyclerView.Adapter<AlertsAdapter.AlertViewHolder>() {
 
-    private val TAG = "AlertsAdapter"
+    private val _tag = "AlertsAdapter"
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var mAlerts = emptyList<Alert>()
-    //TODO try with lateinit, to avoid nullable values in Alert
     private lateinit var mLocation: Location
 
     inner class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        val icon: ImageView = itemView.findViewById(R.id.alerticon)
-        val location: TextView = itemView.findViewById(R.id.alertLocation)
-        val timestamp: TextView = itemView.findViewById(R.id.alertTimestamp)
-        val gravityIcon: ImageView = itemView.findViewById(R.id.alertGravity)
+        val icon: ImageView = itemView.findViewById(R.id.alert_icon)
+        val location: TextView = itemView.findViewById(R.id.alert_location)
+        val timestamp: TextView = itemView.findViewById(R.id.alert_timestamp)
+        val gravityIcon: ImageView = itemView.findViewById(R.id.alert_gravity)
         lateinit var disasterType: DisasterType
 
         override fun onClick(v: View?) {
-            Log.d(TAG, "Alert info button onClick handler")
+            Log.d(_tag, "Alert info button onClick handler")
             if (v?.id == R.id.alert_info_btn) {
                 val action = when (disasterType) {
                     HURRICANE ->
@@ -53,7 +52,7 @@ class AlertsAdapter internal constructor(context: Context) :
                     else -> null
                 }
                 action?.let {
-                    Log.d(TAG, "switching to new fragment")
+                    Log.d(_tag, "switching to new fragment")
                     v.findNavController().navigate(action)
                 }
             }
@@ -89,7 +88,6 @@ class AlertsAdapter internal constructor(context: Context) :
         (holder.itemView.findViewById<ImageButton>(R.id.alert_info_btn)).setOnClickListener(holder)
     }
 
-    //TODO link button to prepare page
     private fun getAlertIconId(type: DisasterType) = when (type) {
         AVALANCHE -> R.mipmap.avalanche_icon
         EARTHQUAKE -> R.mipmap.earthquake_icon
@@ -107,7 +105,7 @@ class AlertsAdapter internal constructor(context: Context) :
         else -> 0
     }
 
-    //TODO put setters in a coroutine scope, each waiting the end of the other call, before executing
+    //TODO put setters in a Coroutine scope, each waiting the end of the other call, before executing
     //TODO notify with payloads
     internal fun setDisasters(disasters: List<Disaster>) {
         if (::mLocation.isInitialized) {

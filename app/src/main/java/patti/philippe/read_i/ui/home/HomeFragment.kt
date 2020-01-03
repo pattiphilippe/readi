@@ -20,7 +20,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var mLocationController: LocationController
 
     companion object {
-        val REQUEST_PERMISSION_LOCATION = 10
+        const val REQUEST_PERMISSION_LOCATION = 10
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

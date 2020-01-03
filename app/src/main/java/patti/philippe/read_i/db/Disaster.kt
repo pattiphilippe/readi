@@ -1,6 +1,5 @@
 package patti.philippe.read_i.db
 
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*

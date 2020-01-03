@@ -12,14 +12,14 @@ import com.google.firebase.auth.FirebaseUser
 import patti.philippe.read_i.MainActivity
 import patti.philippe.read_i.R
 
-abstract class BaseFragment : Fragment(), View.OnClickListener {
+abstract class BaseFragment(layoutId : Int) : Fragment(layoutId), View.OnClickListener {
 
     //TODO add profile page in main activity, with possibility to verify email
 
     protected lateinit var auth: FirebaseAuth
     private var progressBar: ProgressBar? = null
     private var errorTextView: TextView? = null
-    protected abstract val TAG:String
+    protected abstract val mTag:String
 
     companion object {
         const val EXTRA_USER = "EXTRA_USER"
@@ -39,7 +39,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
     }
     abstract fun initListeners()
 
-    fun setProgressBar() {
+    private fun setProgressBar() {
         progressBar = view?.findViewById(R.id.progressBar)
     }
 
@@ -71,7 +71,7 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d(TAG, "onActivityResult")
+        Log.d(mTag, "onActivityResult")
         when (resultCode) {
             RsC_SIGN_OUT -> {
                 signOut()
@@ -79,17 +79,17 @@ abstract class BaseFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    open protected fun signIn(){
-        Log.d(TAG, "signing In")
+    protected open fun signIn(){
+        Log.d(mTag, "signing In")
     }
 
-    open protected fun signOut() {
-        Log.d(TAG, "signing Out")
+    protected open fun signOut() {
+        Log.d(mTag, "signing Out")
         auth.signOut()
     }
 
     protected fun signedIn(user: FirebaseUser) {
-        Log.d(TAG, "signedIn")
+        Log.d(mTag, "signedIn")
         context?.let {
             val intent = Intent(requireContext(), MainActivity::class.java).apply {
                 putExtra(EXTRA_USER, user)

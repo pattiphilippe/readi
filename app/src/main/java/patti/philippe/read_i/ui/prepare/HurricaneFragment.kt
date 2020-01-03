@@ -2,7 +2,7 @@ package patti.philippe.read_i.ui.prepare
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_hurricane.hurr_info_btn
+import kotlinx.android.synthetic.main.fragment_hurricane.*
 import patti.philippe.read_i.R
 
 class HurricaneFragment : BaseFragment(R.layout.fragment_hurricane){

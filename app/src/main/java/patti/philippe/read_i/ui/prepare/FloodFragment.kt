@@ -2,7 +2,7 @@ package patti.philippe.read_i.ui.prepare
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_flood.flood_info_btn
+import kotlinx.android.synthetic.main.fragment_flood.*
 import patti.philippe.read_i.R
 
 class FloodFragment : BaseFragment(R.layout.fragment_flood){

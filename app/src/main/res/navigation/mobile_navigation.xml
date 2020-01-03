@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_nav_home_to_fragment_extreme_heat"
             app:destination="@id/fragment_extreme_heat" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_profile"
+            app:destination="@id/nav_profile" />
     </fragment>
 
     <fragment
@@ -57,5 +60,10 @@
         android:name="patti.philippe.read_i.ui.prepare.FloodFragment"
         android:label="@string/flood_title"
         tools:layout="@layout/fragment_flood" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="patti.philippe.read_i.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+    </fragment>
 
 </navigation>

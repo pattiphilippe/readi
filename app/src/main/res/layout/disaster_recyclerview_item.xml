@@ -24,8 +24,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/alerticon"
-                android:contentDescription=""
+                android:id="@+id/alert_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="start|center_vertical"
@@ -33,7 +32,7 @@
                 android:layout_marginEnd="10dp" />
 
             <ImageView
-                android:id="@+id/alertGravity"
+                android:id="@+id/alert_gravity"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="top|end"
@@ -47,13 +46,13 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/alertLocation"
+                    android:id="@+id/alert_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/alertTimestamp"
+                    android:id="@+id/alert_timestamp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp" />
@@ -63,25 +62,27 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/alertButtons"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="end">
 
             <ImageButton
                 android:id="@+id/alert_evacuate_btn"
+                android:contentDescription="@string/alert_evacuate_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_directions_run_24dp" />
 
             <ImageButton
                 android:id="@+id/alert_info_btn"
+                android:contentDescription="@string/alert_info_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_info_outline_24dp" />
 
             <ImageButton
                 android:id="@+id/alert_share_btn"
+                android:contentDescription="@string/alert_share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 card_view:srcCompat="@drawable/ic_share_24dp" />

@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-@Database(entities = arrayOf(Disaster::class), version = 1, exportSchema = false)
+@Database(entities = [Disaster::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class DisasterRoomDatabase : RoomDatabase() {
 

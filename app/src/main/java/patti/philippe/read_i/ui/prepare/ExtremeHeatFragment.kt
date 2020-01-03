@@ -2,7 +2,7 @@ package patti.philippe.read_i.ui.prepare
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.fragment_extreme_heat.heat_info_btn
+import kotlinx.android.synthetic.main.fragment_extreme_heat.*
 import patti.philippe.read_i.R
 
 class ExtremeHeatFragment : BaseFragment(R.layout.fragment_extreme_heat) {
